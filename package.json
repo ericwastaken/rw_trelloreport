@@ -7,13 +7,13 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "E.A.Soto",
-  "license": "ISC",
+  "license": "",
   "dependencies": {
-    "prettier": "~1.13.4",
-    "request": "~2.87.0",
-    "request-promise": "~4.2.2",
-    "axios": "~0.18.0",
-    "bluebird": "~3.5.1",
-    "dateformat": "~3.0.3"
+    "prettier": "^1.13.4",
+    "request": "^2.87.0",
+    "request-promise": "^4.2.2",
+    "axios": "^0.18.0",
+    "bluebird": "^3.5.1",
+    "dateformat": "^3.0.3"
   }
 }

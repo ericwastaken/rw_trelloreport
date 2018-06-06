@@ -6,7 +6,8 @@ const TrelloApi = require('./lib/TrelloApi.js');
 
 /**
  * This is autility script to provide the IDs of all the lists in a board, passed as a command line argument.
- *
+ * Syntax:
+ *   `./lists.js XXXXXXX` where XXXXXXX is your Board Id. Find the Board Id under the "more" menu for the board.
  */
 
 if (!process.argv[2]) {

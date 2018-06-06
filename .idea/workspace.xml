@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4098e1c2-cd18-4f62-967e-a7738782e9f8" name="Default" comment="" />
+    <list default="true" id="4098e1c2-cd18-4f62-967e-a7738782e9f8" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/lists.js" beforeDir="false" afterPath="$PROJECT_DIR$/lists.js" afterDir="false" />
+    </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -59,23 +61,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="lists.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="lists.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/lists.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="513">
-              <caret line="27" column="19" selection-start-line="27" selection-start-column="19" selection-end-line="27" selection-end-column="19" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="README.md" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/README.md">
-          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-            <state split_layout="SPLIT">
-              <first_editor relative-caret-position="-388">
-                <caret line="24" lean-forward="true" selection-start-line="24" selection-end-line="24" />
-              </first_editor>
-              <second_editor />
+            <state relative-caret-position="171">
+              <caret line="9" column="112" selection-start-line="9" selection-start-column="112" selection-end-line="9" selection-end-column="112" />
             </state>
           </provider>
         </entry>
@@ -117,8 +107,8 @@
         <option value="$PROJECT_DIR$/conf/conf.json" />
         <option value="$PROJECT_DIR$/report.js" />
         <option value="$PROJECT_DIR$/lib/TrelloApi.js" />
-        <option value="$PROJECT_DIR$/lists.js" />
         <option value="$PROJECT_DIR$/README.md" />
+        <option value="$PROJECT_DIR$/lists.js" />
       </list>
     </option>
   </component>
@@ -146,7 +136,7 @@
   </component>
   <component name="ProjectFrameBounds">
     <option name="x" value="498" />
-    <option name="y" value="99" />
+    <option name="y" value="98" />
     <option name="width" value="1850" />
     <option name="height" value="1142" />
   </component>
@@ -218,22 +208,23 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1528244189386</updated>
-      <workItem from="1528244190934" duration="12494000" />
+      <workItem from="1528244190934" duration="13216000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="12494000" />
+    <option name="totallyTimeSpent" value="13216000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="498" y="99" width="1850" height="1142" extended-state="0" />
+    <frame x="498" y="98" width="1850" height="1142" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="3" visible="true" weight="0.24986331" />
+      <window_info content_ui="combo" id="Project" order="3" visible="true" weight="0.24986331" />
       <window_info anchor="bottom" id="TODO" order="10" />
       <window_info anchor="bottom" id="Docker" order="0" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Event Log" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Event Log" order="2" sideWeight="0.50027335" side_tool="true" weight="0.3291866" />
       <window_info anchor="bottom" id="Find" order="5" />
-      <window_info anchor="bottom" id="Run" order="6" visible="true" weight="0.3291866" />
+      <window_info anchor="bottom" id="Run" order="6" sideWeight="0.49972662" visible="true" weight="0.3291866" />
       <window_info anchor="bottom" id="Version Control" order="3" />
       <window_info id="npm" order="0" side_tool="true" />
       <window_info id="Structure" order="2" side_tool="true" weight="0.25" />
@@ -336,20 +327,20 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lists.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="513">
-          <caret line="27" column="19" selection-start-line="27" selection-start-column="19" selection-end-line="27" selection-end-column="19" />
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="FIRST">
+          <first_editor relative-caret-position="1482">
+            <caret line="78" column="19" lean-forward="true" selection-start-line="78" selection-start-column="19" selection-end-line="78" selection-end-column="19" />
+          </first_editor>
+          <second_editor />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="-388">
-            <caret line="24" lean-forward="true" selection-start-line="24" selection-end-line="24" />
-          </first_editor>
-          <second_editor />
+    <entry file="file://$PROJECT_DIR$/lists.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="171">
+          <caret line="9" column="112" selection-start-line="9" selection-start-column="112" selection-end-line="9" selection-end-column="112" />
         </state>
       </provider>
     </entry>
