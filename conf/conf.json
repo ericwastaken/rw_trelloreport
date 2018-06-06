@@ -2,9 +2,9 @@
   "board": {
     "card_fields": "name,shortUrl,due",
     "card_otput_format":
-      "${card['name']} - Due: ${dateFormat(card['due'],'shortDate')}\n${card['shortUrl']}",
+      "  ${card['name']} - ${dateString}\n    ${card['shortUrl']}",
     "list_name_format": "\n${listName}",
-    "empty_list_placeholder": "No tutorials in this phase.",
+    "empty_list_placeholder": "  No tutorials in this phase.",
     "lists": [
       {
         "key": "outline",
