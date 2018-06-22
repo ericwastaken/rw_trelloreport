@@ -1,5 +1,14 @@
-# Exclude WebStorm IDE configs
-/.idea/*
+# Exclude WebStorm IDE user specific configs
+# https://intellij-support.jetbrains.com/hc/en-us/articles/206544839-How-to-manage-projects-under-Version-Control-Systems
+**/.idea/workspace.xml 
+**/.idea/tasks.xml
+**/.idea/usage.statistics.xml
+**/.idea/*.iws
+**/.idea/*.iml
+**/.idea/modules.xml
+**/.idea/gradle.xml
+**/.idea/libraries/*
+**/.idea/dictionaries/*
 # Exclude secrets because duh.
 conf/secrets.json
 # Exclude the user's config
