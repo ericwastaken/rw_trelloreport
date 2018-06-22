@@ -1,0 +1,59 @@
+{
+  "board": {
+    "card_fields": "name,shortUrl,due",
+    "card_otput_format":
+      "  ${card['name']} - ${dateString}\n    ${card['shortUrl']}",
+    "list_name_format": "\n${listName}",
+    "empty_list_placeholder": "  No tutorials in this phase.",
+    "lists": [
+      {
+        "key": "outline",
+        "id": "5562debb52fed1ff1792fded",
+        "excludeTryouts": true,
+        "excludeNames": []
+      },
+      {
+        "key": "project",
+        "id": "5562debb52fed1ff1792fdee",
+        "excludeTryouts": true,
+        "excludeNames": []
+      },
+      {
+        "key": "writing",
+        "id": "5562debb52fed1ff1792fdef",
+        "excludeTryouts": true,
+        "excludeNames": []
+      },
+      {
+        "key": "te",
+        "id": "5562debb52fed1ff1792fdf0",
+        "excludeTryouts": true,
+        "excludeNames": []
+      },
+      {
+        "key": "edit",
+        "id": "5562debb52fed1ff1792fdf1",
+        "excludeTryouts": false,
+        "excludeNames": []
+      },
+      {
+        "key": "fpe",
+        "id": "5562debb52fed1ff1792fdf3",
+        "excludeTryouts": false,
+        "excludeNames": []
+      },
+      {
+        "name": "teamlead",
+        "id": "5562debb52fed1ff1792fdf2",
+        "excludeTryouts": false,
+        "excludeNames": ["Proposed Release Schedule"]
+      },
+      {
+        "name": "art",
+        "id": "56f965dbed0c2c9b5342a0d9",
+        "excludeTryouts": false,
+        "excludeNames": []
+      }
+    ]
+  }
+}

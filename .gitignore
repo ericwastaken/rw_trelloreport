@@ -1,1 +1,7 @@
+# Exclude WebStorm IDE configs
+/.idea/*
+# Exclude secrets because duh.
 conf/secrets.json
+# Exclude the user's config
+conf/conf.json
+

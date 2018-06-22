@@ -17,8 +17,10 @@ Before running this script for the first time, you must take the following actio
 - Verify you have NodeJS 8.x installed (install if necessary).
   - To verify that you have NodeJS you can run `node --version` in your terminal. 
 - From the root folder of the script files, install all NodeJS modules with `npm i`.
-- Edit **./conf/secrets.json** and add your Trello API Key and Token. (See 'Authentication' below.)
-- Edit **./conf/conf.json** and replace the IDs there with those of your Trello Board lists. (See 'Configuration' below including a helper script to quickly get all your List Ids.)
+- Copy **./conf/secrets-sample.json** to **./conf/secrets.json**. Edit **./conf/secrets.json** to add your Trello API Key and Token. (See 'Authentication' below.)
+- Copy **./conf/conf-sample.json** to **./conf/conf.json**. Edit **./conf/conf.json** and replace the IDs there with those of your Trello Board lists. (See 'Configuration' below including a helper script to quickly get all your List Ids.)
+
+> Note: **./conf/conf.json** and **./conf/secrets.json** are both excluded from git since this is information unique to you! 
 
 ## Authentication
 
