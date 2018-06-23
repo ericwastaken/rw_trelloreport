@@ -19,7 +19,10 @@ const conf = require('./conf/conf.json');
  */
 
 // Output format (html, rtf, text, or anything else for text)
-let outputFormat = conf.board.output.outputFormat || 'text';
+let outputFormat = 'text';
+if (conf.board && conf.board.output) {
+  outputFormat = conf.board.output.outputFormat || 'text';
+}
 
 // Decide the lists to print based on the config. Note, the listItem ids must be defined in ./conf/conf.json
 const listsToPrint = conf.board.lists;
