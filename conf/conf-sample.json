@@ -1,10 +1,17 @@
 {
   "board": {
+    "output": {
+      "outputFormat": "html",
+      "htmlWrapperPath": "./conf/report-layout.html",
+      "htmlCssPath": "./conf/report-styles.css",
+      "htmlOutputPath": "./report.html",
+      "autoOpenOutput": true
+    },
     "card_fields": "name,shortUrl,due",
     "card_otput_format":
-      "  ${card['name']} - ${dateString}\n    ${card['shortUrl']}",
-    "list_name_format": "\n${listName}",
-    "empty_list_placeholder": "  No tutorials in this phase.",
+      "\n* ${card['name']} - ${dateString}\n  [View in Trello](${card['shortUrl']})",
+    "list_name_format": "\n## ${listName}",
+    "empty_list_placeholder": "\n*No tutorials in this phase.*",
     "lists": [
       {
         "key": "outline",
