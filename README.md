@@ -174,8 +174,15 @@ Trello API Documentation:
 - The main detailed REST API documentation
   - https://trello.readme.io/reference#introduction
 
+## Wish List
+
+- When the config is set to HTML output, replace *card_otput_format* and *list_name_format* with a more robust template like pug/jade or mustache. This could also consolidate the report-layout.html and report-styles.css into the single file for easier editing. This feature must not affect TEXT output!
+- Add support for multiple boards in *conf.json* + add a command line to choose which board to report on. If none provided, we can exit with error OR provide a list for input?  
+
 ## Changelog
 
+- v1.1.1
+  - A small patch to resolve an issue where card names that started with numbers would format strange in Markdown/HTML when the card name was the first item in the row. Markdown sees the numbers as markdown and tries to render an OL/LI.
 - v1.1.0
   - Follow up release which added support for HTML Output and excluded user config files from the repository for easy updating.
   - Note that this version **still** supports the v1.0.0 config file. As such with this new version , text output should still be produced as it was before, though for HTML output, the config needs to be updated! See the config section of this readme for the needed changes.
