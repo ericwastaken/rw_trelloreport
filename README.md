@@ -61,7 +61,16 @@ The config looks like this:
 - **output** is used to control the type of output you want. It is further described below. 
 - **card_fields** should come from the Trello API docs. See https://developers.trello.com/v1.0/reference#card-object.
 - **card_output_format** is a javascript enabled string that will be used to "output" the details for each card. You use the `${card['fieldName']}` object to otuput field data. You can't output a field that you did not include in **card_fields**.
-  - If you include 'due' as one of the API fields, ${dateString} is a special formatted variable provided for you that automatically outputs the string 'due: [due-date-here]' or 'overdue: [due-date-here]'. It's optional if you want to use this. If you want no formatting at all on due date, you can use `${card['due']}` or for a formatted date you can use `${dateFormat(card['due'],'shortDate')}`. 
+  - If you include 'due' as one of the API fields, ${dateString} is a special formatted variable provided for you that automatically outputs the string 'due: [due-date-here]' or 'overdue: [due-date-here]'. It's optional if you want to use this. If you want no formatting at all on due date, you can use `${card['due']}` or for a formatted date you can use `${dateFormat(card['due'],'shortDate')}`.
+  - If your cards start with one or two numbers and a period you need to escape the card name.
+    Change the way you read card name in **card_output_format** from:
+    ```javascript
+    ${card['name']}
+    ``` 
+    To:
+    ```javascript
+    ${escapeMarkdown(card['name'])}
+    ```     
 - **list_name_format** is a javascript enabled string that is used to "output" the title of each list. You place the list name with `${listName}`.
 - **empty_list_placeholder** is output when a list has no cards.
 - **lists** is an array that defines each of the lists you want to output from. See below for the details of that element.
