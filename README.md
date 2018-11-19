@@ -125,27 +125,33 @@ https://trello.com/b/d9smHs4A
 
 The board id is the last part of the url, **d9smHs4A** in the example above.
 
+Now, add this to your **./conf/conf.json** under **board**, **urlId**.
+
 To find all the list ids for this board, you would run:
 
 ```javascript
-./lists.js d9smHs4A
+./lists.js
 ```    
 
 This will show you details about all the lists in your board.
 
 ```
-
 ...
 
+ board id: 5562debb52fed1ff1792fdec
 list name: Wishlist - High Priority
        id: 5ae1312047efa03805e648a1
 
+ board id: 5562debb52fed1ff1792fdec
 list name: Wishlist
        id: 55bb8393c6f63f54c0ac81e9
 
 ...
 
 ```
+
+Also, take note of the 'board id' and add it to your **./conf/conf.json** under **board**, **id**. 
+(You will need this for the search script).
 
 ## Generating a Report
 
@@ -170,6 +176,39 @@ To generate a report on Windows, change into the root directory where this tool 
 node report.js
 ```
 
+## Searching for Cards
+
+> Note: See the 'Configuration' and 'Authentication' sections above for pre-requisites to being able to run reports.
+
+To generate a report based on a search on macOs or Linux, change into the root directory where this tool is installed and type:
+
+```bash
+./search.js "some search string"
+
+```
+
+To generate a report on Windows, change into the root directory where this tool is installed and type:
+```
+node search.js "some search string"
+```
+
+The above will perform a WHOLE WORD search. 
+
+To search for all cards where a specific user is a member:
+
+```bash
+./search.js "@easoto"
+
+```
+
+To generate a report on Windows, change into the root directory where this tool is installed and type:
+
+```
+node search.js "@easoto"
+```
+
+You can find a username easily in the Trello interface by typing a message to a user with the "@" sign.
+
 ## Platform Note
 
 This has been tested under macOS High Sierra and NodeJS 8.9.0. It very likely workds under other versions of macOS, versions of Linux and Windows as well as other NodeJS versions, but I've not tested.
@@ -190,6 +229,9 @@ Trello API Documentation:
 
 ## Changelog
 
+- v1.1.2
+  - Introduced a new script "search" to allow for a report based on a search string (or a search for cards where a certain user is a member.)
+  - Refactored "lists" to use the board url id from the **conf.json** file instead of as a command line input.
 - v1.1.1
   - A small patch to resolve an issue where card names that started with numbers would format strange in Markdown/HTML when the card name was the first item in the row. Markdown sees the numbers as markdown and tries to render an OL/LI.
 - v1.1.0
