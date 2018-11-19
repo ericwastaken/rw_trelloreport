@@ -49,15 +49,22 @@ The config looks like this:
 
 ```
 "board": {
+  "id": "5562debb52fed1ff1792fdec",
+  "urlId": "d9smHs4A",
   "output": {},
   "card_fields": "name,shortUrl,due",
   "card_otput_format":
         "\n* ${card['name']} - ${dateString}\n  [View in Trello](${card['shortUrl']})",
   "list_name_format": "\n## ${listName}",
   "empty_list_placeholder": "\n*No tutorials in this phase.*",
+  "card_fields_search": "name,shortUrl,due,list",
+  "card_otput_format_search":
+    "\n* ${card['name']} - ${dateString}\n  [View in Trello](${card['shortUrl']}) (${card['list']['name']})",
   "lists": []
 }
 ```
+- **id** is the Trello id for the board you'll be reporting from. See "How to find the Board and List IDs" further down in this document.
+- **urlId** is the Trello Url id for the board you'll be reporting from. See "How to find the Board and List IDs" further down in this document.
 - **output** is used to control the type of output you want. It is further described below. 
 - **card_fields** should come from the Trello API docs. See https://developers.trello.com/v1.0/reference#card-object.
 - **card_output_format** is a javascript enabled string that will be used to "output" the details for each card. You use the `${card['fieldName']}` object to otuput field data. You can't output a field that you did not include in **card_fields**.
@@ -73,7 +80,10 @@ The config looks like this:
     ```     
 - **list_name_format** is a javascript enabled string that is used to "output" the title of each list. You place the list name with `${listName}`.
 - **empty_list_placeholder** is output when a list has no cards.
+- **card_fields_search** is similar to **card_fields**, these are the fields that will be available in search results.
+- **card_otput_format_search** is similar to **card_otput_format**, these is the format that will be used in search results.
 - **lists** is an array that defines each of the lists you want to output from. See below for the details of that element.
+
 
 The **lists** array is an array of the following, repeated once per list that you want to output from (in order of output):
 
@@ -114,7 +124,7 @@ If you set the above two values only, then the HTML will output to the console. 
 - **htmlOutputPath** (a string file path) this is used as the path for an output file which will be created by this script. Careful, this script silently replaces an existing repot with the same file name!
 - **autoOpenOutput** (a boolean) if 'true', then the script will not just output to file, but will perform an `open {otput-file-path}` to cause the file to be opened in your default html handler.
 
-**How to find the List IDs**
+**How to find the Board and List IDs**
 
 This tool has a script `./lists.js` that will show you the IDs of all the lists in a board. First, find your **board id**. To do this, in Trello on the board you are interested in, click **show menu** then **more**. Notice you're able to see a **Link to this board**. 
 
