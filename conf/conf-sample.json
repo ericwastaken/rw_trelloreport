@@ -10,12 +10,12 @@
       "autoOpenOutput": true
     },
     "card_fields": "name,shortUrl,due",
-    "card_otput_format":
+    "card_output_format":
       "\n* ${card['name']} - ${dateString}\n  [View in Trello](${card['shortUrl']})",
     "list_name_format": "\n## ${listName}",
     "empty_list_placeholder": "\n*No tutorials in this phase.*",
     "card_fields_search": "name,shortUrl,due,list",
-    "card_otput_format_search":
+    "card_output_format_search":
       "\n* ${card['name']} - ${dateString}\n  [View in Trello](${card['shortUrl']}) (${card['list']['name']})",
     "lists": [
       {

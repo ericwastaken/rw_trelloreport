@@ -53,12 +53,12 @@ The config looks like this:
   "urlId": "d9smHs4A",
   "output": {},
   "card_fields": "name,shortUrl,due",
-  "card_otput_format":
+  "card_output_format":
         "\n* ${card['name']} - ${dateString}\n  [View in Trello](${card['shortUrl']})",
   "list_name_format": "\n## ${listName}",
   "empty_list_placeholder": "\n*No tutorials in this phase.*",
   "card_fields_search": "name,shortUrl,due,list",
-  "card_otput_format_search":
+  "card_output_format_search":
     "\n* ${card['name']} - ${dateString}\n  [View in Trello](${card['shortUrl']}) (${card['list']['name']})",
   "lists": []
 }
@@ -81,7 +81,7 @@ The config looks like this:
 - **list_name_format** is a javascript enabled string that is used to "output" the title of each list. You place the list name with `${listName}`.
 - **empty_list_placeholder** is output when a list has no cards.
 - **card_fields_search** is similar to **card_fields**, these are the fields that will be available in search results.
-- **card_otput_format_search** is similar to **card_otput_format**, these is the format that will be used in search results.
+- **card_output_format_search** is similar to **card_output_format**, these is the format that will be used in search results.
 - **lists** is an array that defines each of the lists you want to output from. See below for the details of that element.
 
 
@@ -234,7 +234,7 @@ Trello API Documentation:
 
 ## Wish List
 
-- When the config is set to HTML output, replace *card_otput_format* and *list_name_format* with a more robust template like pug/jade or mustache. This could also consolidate the report-layout.html and report-styles.css into the single file for easier editing. This feature must not affect TEXT output!
+- When the config is set to HTML output, replace *card_output_format* and *list_name_format* with a more robust template like pug/jade or mustache. This could also consolidate the report-layout.html and report-styles.css into the single file for easier editing. This feature must not affect TEXT output!
 - Add support for multiple boards in *conf.json* + add a command line to choose which board to report on. If none provided, we can exit with error OR provide a list for input?  
 
 ## Changelog

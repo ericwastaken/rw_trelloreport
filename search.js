@@ -17,7 +17,7 @@ const conf = require('./conf/conf.json');
  * If the search term starts with '@', then the search will be for a "member" on
  * cards.
  *
- * When outputFormat is set to html or rtf, we expect the conf 'card_otput_format'
+ * When outputFormat is set to html or rtf, we expect the conf 'card_output_format'
  * to contain markdown which will then converted into html/rtf.
  *
  */
