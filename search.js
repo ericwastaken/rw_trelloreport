@@ -36,20 +36,40 @@ if (!boardToSearch) {
   process.exit(-1);
 }
 
-const searchQuery = process.argv[2];
-if (!searchQuery) {
+const arguments = process.argv[2];
+if (!arguments) {
   console.log(
-    `{ "Error": "Please pass the string to search as an argument to this script!"}`
+    `{ "Error": "Please pass one or more strings to search as an argument to this script!"}`
   );
   process.exit(-1);
 }
 
+// How many CLI queries were we passed
+let queries = [];
+let modifiers = {
+  excludeDone: false
+};
+
+for (let j = 2; j < process.argv.length; j++) {
+  let param = process.argv[j];
+  if (param.startsWith('--')) {
+    // it's a cli modifier, so set it
+    switch (param.toLowerCase()) {
+      case '--excludedone':
+        modifiers.excludeDone = true;
+    }
+  } else {
+    // it's a query so add it to that array
+    queries.push(process.argv[j]);
+  }
+
+}
 // Set an array to hold our promises
 let promiseArray = [];
 let promiseResults = [];
 
 // Execute the search
-promiseArray.push(() => ReportFormat.printSearchReport(searchQuery, boardToSearch));
+promiseArray.push(() => ReportFormat.printSearchReport(queries, boardToSearch, modifiers));
 
 // With all the promises in an array, now we want to fire each in sequence and capture results
 Promise.each(promiseArray, (aPromise, index, length) => {
