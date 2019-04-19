@@ -78,8 +78,8 @@ The config looks like this:
 
 ```
 "board": {
-  "id": "5562debb52fed1ff1792fdec",
-  "urlId": "d9smHs4A",
+  "id": "TRELLO-BOARD-ID",
+  "urlId": "TRELLO-BOARD-URL-ID",
   "card_fields": "name,shortUrl,due",
   "card_output_format":
         "\n* ${card['name']} - ${dateString}\n  [View in Trello](${card['shortUrl']})",
@@ -96,7 +96,9 @@ The config looks like this:
 You must edit the following keys:
 
 - **id** is the Trello id for the board you'll be reporting from. See "How to find the Board and List IDs" further down in this document.
+  - Board id looks something like this: `5242dbcb52hed1ff1752fdac` (note, this id is not real.)
 - **urlId** is the Trello Url id for the board you'll be reporting from. See "How to find the Board and List IDs" further down in this document.
+  - URL id looks something like this: `a9bcPt5B` (note, this value is not real.)
 
 Optionally, you may also edit:
 
@@ -125,8 +127,8 @@ The **lists** array in **conf.json** is an array of the following, repeated once
 
 ```
 {
-  "key": "outline",
-  "id": "5562debb52fed1ff1792fded",
+  "key": "convenience list name 1",
+  "id": "TRELLO-LIST-ID-01",
   "excludeTryouts": true,
   "excludeNames": []
 }
@@ -167,9 +169,9 @@ If you set the above two values only, then the HTML will output to the console. 
 This tool includes a script `lists.js` that will show you the IDs of all the lists in a board. First, find your **board id**. To do this, in Trello on the board you are interested in, click **show menu** then **more**. Notice you're able to see a **Link to this board**.
 
 That link contains the board id. Links look like this:
-> https://trello.com/b/d9smHs4A
+> https://trello.com/b/a9bcPt5B
 
-The board id is the last part of the url, **d9smHs4A** in the example above.
+The board id is the last part of the url, **a9bcPt5B** in the example above. (Note, 'a9bcPt5B' is not a real board!)
 
 Now, add this to your **conf.json** under **board**, **urlId**.
 
@@ -183,18 +185,16 @@ This will show you details about all the lists in your board.
 
 ```
 ...
-
- board id: 5562debb52fed1ff1792fdec
+ board id: TRELLO-BOARD-ID
 list name: Wishlist - High Priority
-       id: 5ae1312047efa03805e648a1
+       id: TRELLO-BOARD-URL-ID
 
- board id: 5562debb52fed1ff1792fdec
+ board id: TRELLO-BOARD-ID
 list name: Wishlist
-       id: 55bb8393c6f63f54c0ac81e9
-
+       id: TRELLO-BOARD-URL-ID
 ...
-
 ```
+(Of course `TRELLO-BOARD-ID` and `TRELLO-BOARD-URL-ID` will be the proper IDs for your boards/lists.)
 
 Also, take note of the 'board id' and add it to your **conf.json** under **board**, **id**.
 (You will need this for the search script).
@@ -232,7 +232,7 @@ The above will perform a WHOLE WORD search.
 To search for all cards where a specific user is a member:
 
 ```bash
-node search.js "@easoto"
+node search.js "@johnnyappleseed"
 
 ```
 You can find a username easily in the Trello interface by typing a message to a user with the "@" sign.
@@ -260,6 +260,7 @@ Trello API Documentation:
 - v1.1.3
   - Tweaks to the README to make it more generic.
   - Implemented GitPod support.
+  - Randomized the IDs in the readme and sample files.
 - v1.1.2
   - Introduced a new script "search" to allow for a report based on a search string (or a search for cards where a certain user is a member.)
   - Refactored "lists" to use the board url id from the **conf.json** file instead of as a command line input.

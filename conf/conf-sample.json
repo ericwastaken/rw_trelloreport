@@ -1,7 +1,7 @@
 {
   "board": {
-    "id": "5562debb52fed1ff1792fdec",
-    "urlId": "d9smHs4A",
+    "id": "TRELLO-BOARD-ID",
+    "urlId": "TRELLO-BOARD-URL-ID",
     "card_fields": "name,shortUrl,due",
     "card_output_format":
       "\n* ${card['name']} - ${dateString}\n  [View in Trello](${card['shortUrl']})",
@@ -12,51 +12,21 @@
       "\n* ${card['name']} - ${dateString}\n  [View in Trello](${card['shortUrl']}) (${card['list']['name']})",
     "lists": [
       {
-        "key": "outline",
-        "id": "5562debb52fed1ff1792fded",
+        "key": "convenience list name 1",
+        "id": "TRELLO-LIST-ID-01",
         "excludeTryouts": true,
         "excludeNames": []
       },
       {
-        "key": "project",
-        "id": "5562debb52fed1ff1792fdee",
+        "key": "convenience list name 2",
+        "id": "TRELLO-LIST-ID-02",
         "excludeTryouts": true,
         "excludeNames": []
       },
       {
-        "key": "writing",
-        "id": "5562debb52fed1ff1792fdef",
+        "key": "convenience list name 3",
+        "id": "TRELLO-LIST-ID-03",
         "excludeTryouts": true,
-        "excludeNames": []
-      },
-      {
-        "key": "te",
-        "id": "5562debb52fed1ff1792fdf0",
-        "excludeTryouts": true,
-        "excludeNames": []
-      },
-      {
-        "key": "edit",
-        "id": "5562debb52fed1ff1792fdf1",
-        "excludeTryouts": false,
-        "excludeNames": []
-      },
-      {
-        "key": "fpe",
-        "id": "5562debb52fed1ff1792fdf3",
-        "excludeTryouts": false,
-        "excludeNames": []
-      },
-      {
-        "name": "teamlead",
-        "id": "5562debb52fed1ff1792fdf2",
-        "excludeTryouts": false,
-        "excludeNames": ["Proposed Release Schedule"]
-      },
-      {
-        "name": "art",
-        "id": "56f965dbed0c2c9b5342a0d9",
-        "excludeTryouts": false,
         "excludeNames": []
       }
     ],
