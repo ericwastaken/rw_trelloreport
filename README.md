@@ -214,14 +214,14 @@ Also, take note of the 'board id' and add it to your **conf.json** under **board
 To generate a report on macOs or Linux, change into the root directory where this tool is installed and type:
 
 ```bash
-node reports
+node report
 
 ```
 
 On macOs, you can redirect the script's output to the clipboard with:
 
 ```bash
-node reports | pbcopy
+node report | pbcopy
 
 ```
 
