@@ -12,6 +12,8 @@ For support, contact the author.
 
 ## GitPod Script Installation / First Time Setup
 
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/ericwastaken/rw_trelloreport)
+
 GitPod copies all the config files to sample versions. After GitPod has come up, simply edit the files suit your details! You can edit these files right inside your GitPod workspace.
 
 > **Note:** When you're done with your GitPod workspace edits, you'll want to come back to the same workspace so that you don't have to repeat the edits!

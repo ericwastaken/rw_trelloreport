@@ -18,4 +18,6 @@ conf/report-layout.html
 conf/report-styles.css
 # Exclude any html reports
 *.html
+# Exclude GitPod items we don't want in the repo
+.gitpod/gitpod-bootstrap.log
 
