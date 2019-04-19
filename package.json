@@ -1,7 +1,7 @@
 {
   "name": "rw-trello-report",
-  "version": "1.1.2",
-  "description": "Trello Report Tool for RayWenderlich.com Team Leaders",
+  "version": "1.1.3",
+  "description": "Trello Report Tool for RayWenderlich.com Team Leads",
   "main": "report.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

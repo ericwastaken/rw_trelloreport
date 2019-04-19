@@ -2,13 +2,6 @@
   "board": {
     "id": "5562debb52fed1ff1792fdec",
     "urlId": "d9smHs4A",
-    "output": {
-      "outputFormat": "html",
-      "htmlWrapperPath": "./conf/report-layout.html",
-      "htmlCssPath": "./conf/report-styles.css",
-      "htmlOutputPath": "./report.html",
-      "autoOpenOutput": false
-    },
     "card_fields": "name,shortUrl,due",
     "card_output_format":
       "\n* ${card['name']} - ${dateString}\n  [View in Trello](${card['shortUrl']})",
@@ -66,6 +59,13 @@
         "excludeTryouts": false,
         "excludeNames": []
       }
-    ]
+    ],
+    "output": {
+      "outputFormat": "html",
+      "htmlWrapperPath": "./conf/report-layout.html",
+      "htmlCssPath": "./conf/report-styles.css",
+      "htmlOutputPath": "./output/report.html",
+      "autoOpenOutput": false
+    }
   }
 }
