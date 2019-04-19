@@ -178,7 +178,7 @@ Now, add this to your **conf.json** under **board**, **urlId**.
 To find all the list ids for this board, you would run:
 
 ```bash
-node lists.js
+node lists
 ```
 
 This will show you details about all the lists in your board.
@@ -206,14 +206,14 @@ Also, take note of the 'board id' and add it to your **conf.json** under **board
 To generate a report on macOs or Linux, change into the root directory where this tool is installed and type:
 
 ```bash
-node reports.js
+node reports
 
 ```
 
 On macOs, you can redirect the script's output to the clipboard with:
 
 ```bash
-node reports.js | pbcopy
+node reports | pbcopy
 
 ```
 
@@ -224,7 +224,7 @@ node reports.js | pbcopy
 To generate a report based on a search on macOs or Linux, change into the root directory where this tool is installed and type:
 
 ```bash
-node search.js "some search string"
+node search "some search string"
 
 ```
 The above will perform a WHOLE WORD search.
@@ -232,7 +232,7 @@ The above will perform a WHOLE WORD search.
 To search for all cards where a specific user is a member:
 
 ```bash
-node search.js "@johnnyappleseed"
+node search "@johnnyappleseed"
 
 ```
 You can find a username easily in the Trello interface by typing a message to a user with the "@" sign.
