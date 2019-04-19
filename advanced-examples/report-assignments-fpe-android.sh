@@ -1,6 +1,6 @@
 #!/bin/bash
 
-./search.js --excludeDone \
+node ../search.js --excludeDone \
   @vijaysharm \
   @godfredafful  \
   @taingmeng  \
