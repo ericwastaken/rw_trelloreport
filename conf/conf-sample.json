@@ -7,7 +7,7 @@
       "htmlWrapperPath": "./conf/report-layout.html",
       "htmlCssPath": "./conf/report-styles.css",
       "htmlOutputPath": "./report.html",
-      "autoOpenOutput": true
+      "autoOpenOutput": false
     },
     "card_fields": "name,shortUrl,due",
     "card_output_format":
