@@ -4,19 +4,25 @@
 
 This tool uses the Trello API to pull out lists of cards in the various RW tutorial phases. This tool is written in JavaScript and requires NodeJS 8.x to run.
 
+You can also run this tool via GitPod which requires you to run it inside your browser.
+
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/ericwastaken/rw_trelloreport)
+
 ## Author & Support
 
 This tool was created by Eric A. Soto, eric@issfl.com, [www.ericsoto.net](https://www.ericsoto.net/).
 
 For support, contact the author.
 
-## GitPod Script Installation / First Time Setup
+## GitPod Script Installation / First Time Setup (This is the preferred setup for most users)
 
 [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/ericwastaken/rw_trelloreport)
 
-GitPod copies all the config files to sample versions. After GitPod has come up, simply edit the files suit your details! You can edit these files right inside your GitPod workspace.
+GitPod is an easy way to use this tool without needing to download or install anything on your workstation. Simply click on the **Open in GitPod** icon to launch a virtual machine (using Docker) that will allow you to run this tool.
 
-> **Note:** When you're done with your GitPod workspace edits, you'll want to come back to the same workspace so that you don't have to repeat the edits!
+Although GitPod provides everything you need to run this tool, you do need to configure a few items. Wehn you start a GitPod workspace, a script will reset all the config files to sample versions. After GitPod has come up, simply edit the files to contain your details! You can edit these files right inside your GitPod workspace.
+
+> **Note:** When you're done with your GitPod workspace edits, you'll want to come back to the same workspace so that you don't have to repeat the edits! Simply go to your **GitPod Dashboard** to restart any workspaces you created before.
 
 Files to edit:
 - **./conf/secrets.json** - add your Trello API Key and Token. (See 'Authentication' below.)
@@ -27,9 +33,9 @@ If you plan to use HTML Output, you could also edit if you don't like the defaul
 - **./conf/report-layout.html**.
 - **./conf/report-styles.css**.
 
-## Local (on your computer) Script Installation / First Time Setup
+## Local Script Installation (on your workstation) / First Time Setup
 
-> **Note:** If you're using a GitPod to run this tool, please skip this section. It's been done for you by the GitPod startup process!
+> **Note:** If you're using a GitPod to run this tool, please skip this section. The steps here are handled for you by the GitPod startup process!
 
 Before running this script for the first time, you must take the following actions:
 
@@ -54,7 +60,7 @@ $ cp ./conf/report-layout-sample.html ./conf/report-layout.html
 $ cp ./conf/report-styles-sample.css ./conf/report-styles.css
 ```
 
-After copying, edit both html and css files suit your preferences!
+After copying, you may edit both html and css files suit your preferences, or you can use them as-is!
 
 ## Authentication
 
@@ -66,13 +72,15 @@ To generate your key and token:
 - Visit https://trello.com/app-key. This page displays your API KEY.
 - From that same page you can generate a token for yourself: "_If you are looking to build an application for yourself, or are doing local testing, you can manually generate a Token._"
 
-**CAUTION:** The API KEY and TOKEN must be protected since they allow anyone in control of them with full access to your Trello account!
+Copy both your API KEY and TOKEN to **./conf/conf.json**.
+
+**CAUTION:** The API KEY and TOKEN must be protected since they allow anyone in control of them with full access to your Trello account! For this reason, the file **secrets.json** is not included in the repository!
 
 ## Configuration
 
-Please edit **./conf/conf.json** and enter the details on the Board you want to report on.
+Edit **./conf/conf.json** and enter the details on the Board you want to report on.
 
-> **Note:** Other than the various **ids**, the **conf.json** can be used "as is" if it works for you!
+> **Note:** Other than the various **ids** and the **lists**, the **conf.json** can be used "as is" if it works for you!
 
 The config looks like this:
 
@@ -99,6 +107,7 @@ You must edit the following keys:
   - Board id looks something like this: `5242dbcb52hed1ff1752fdac` (note, this id is not real.)
 - **urlId** is the Trello Url id for the board you'll be reporting from. See "How to find the Board and List IDs" further down in this document.
   - URL id looks something like this: `a9bcPt5B` (note, this value is not real.)
+- **lists** is an array that defines each of the lists you want to output from. See below for the details of that element.
 
 Optionally, you may also edit:
 
@@ -118,7 +127,6 @@ Optionally, you may also edit:
 - **empty_list_placeholder** is output when a list has no cards.
 - **card_fields_search** is similar to **card_fields**, these are the fields that will be available in search results.
 - **card_output_format_search** is similar to **card_output_format**, these is the format that will be used in search results.
-- **lists** is an array that defines each of the lists you want to output from. See below for the details of that element.
 - **output** is used to control the type of output you want. It is further described below.
 
 ### Configuring the lists to show
@@ -239,7 +247,7 @@ You can find a username easily in the Trello interface by typing a message to a 
 
 ## Platform Note
 
-This has been tested under macOS High Sierra, Linux and NodeJS 8.9.0. It very likely workds under other versions of macOS, and Windows as well as other NodeJS versions, but I've not tested.
+This has been tested under macOS High Sierra, Linux, NodeJS 8.9.0 and NodeJS 10.15.3. It very likely workds under other versions of macOS, and Windows as well as other NodeJS versions, but I've not tested.
 
 ## References
 
@@ -254,6 +262,8 @@ Trello API Documentation:
 
 - When the config is set to HTML output, replace *card_output_format* and *list_name_format* with a more robust template like pug/jade or mustache. This could also consolidate the report-layout.html and report-styles.css into the single file for easier editing. This feature must not affect TEXT output!
 - Add support for multiple boards in *conf.json* + add a command line to choose which board to report on. If none provided, we can exit with error OR provide a list for input?
+- Add an easier way to access API KEY, TOKEN if possible.
+- Add an easier way to figure out and configure Board Id, Lists Ids.
 
 ## Changelog
 

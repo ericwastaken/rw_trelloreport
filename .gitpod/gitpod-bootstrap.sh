@@ -1,5 +1,9 @@
 #!/bin/bash
 
+echo ""
+echo "Bootstrap running..."
+echo ""
+
 if [[ ! -f .gitpod/gitpod-bootstrap.log ]]; then
     # Bootstrap has not run, so we do it!
 
@@ -22,4 +26,7 @@ else
 fi
 
 # User Output
+echo ""
 echo "Please review the README.md for configuration of this tool so it can report on YOUR Trello boards!"
+echo "This tool was created by Eric A. Soto, eric@issfl.com, www.ericsoto.net"
+echo ""
