@@ -1,12 +1,13 @@
 #!/usr/local/bin/node
 
 // Imports
-const ReportFormat = require('./lib/ReportFormat.js');
-const HtmlOutput = require('./lib/HtmlOutput.js');
+const path = require('path');
+const ReportFormat = require(path.resolve(__dirname, './lib/ReportFormat.js'));
+const HtmlOutput = require(path.resolve(__dirname, './lib/HtmlOutput.js'));
 const Promise = require('bluebird');
 
 // Config
-const conf = require('./conf/conf.json');
+const conf = require(path.resolve(__dirname, './conf/conf.json'));
 
 /**
  * Main Report Script
@@ -82,7 +83,7 @@ Promise.each(promiseArray, (aPromise, index, length) => {
   .then(() => {
     switch (outputFormat) {
       case 'html':
-        HtmlOutput.finalOutput(promiseResults, conf);
+        HtmlOutput.finalOutput(promiseResults, conf, __dirname);
         break;
       default:
         // Otherwise, just outputFormat raw, but as a string with no delimiters

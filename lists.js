@@ -2,10 +2,10 @@
 
 // Imports
 const Promise = require('bluebird');
-const TrelloApi = require('./lib/TrelloApi.js');
+const TrelloApi = require(path.resolve(__dirname, './lib/TrelloApi.js'));
 
 // Config
-const conf = require('./conf/conf.json');
+const conf = require(path.resolve(__dirname, './conf/conf.json'));
 
 /**
  * This is autility script to provide the IDs of all the lists in a board as configured in board.id in the conf.js.

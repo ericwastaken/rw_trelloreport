@@ -1,12 +1,12 @@
 #!/usr/local/bin/node
 
 // Imports
-const ReportFormat = require('./lib/ReportFormat.js');
-const HtmlOutput = require('./lib/HtmlOutput.js');
+const ReportFormat = require(path.resolve(__dirname, './lib/ReportFormat.js'));
+const HtmlOutput = require(path.resolve(__dirname, './lib/HtmlOutput.js'));
 const Promise = require('bluebird');
 
 // Constants
-const conf = require('./conf/conf.json');
+const conf = require(path.resolve(__dirname, './conf/conf.json'));
 
 /**
  * Main Report Script
