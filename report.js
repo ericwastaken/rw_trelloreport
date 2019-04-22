@@ -38,7 +38,7 @@ let promiseResults = [];
 
 // Loop over the lists to print and setup a promise for each. Note the syntax '() => PromiseFunc()' to prevent the promise from firing now!
 for (let listItem of listsToPrint) {
-  promiseArray.push(() => ReportFormat.printListReport(listItem));
+  promiseArray.push(() => ReportFormat.printListReport(listItem, conf));
 }
 
 // With all the promises in an array, now we want to fire each in sequence and capture results

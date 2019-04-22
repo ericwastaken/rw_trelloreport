@@ -79,7 +79,7 @@ let promiseResults = [];
 
 // Execute the search
 promiseArray.push(() =>
-  ReportFormat.printSearchReport(queries, boardToSearch, modifiers)
+  ReportFormat.printSearchReport(queries, boardToSearch, modifiers, conf)
 );
 
 // With all the promises in an array, now we want to fire each in sequence and capture results
