@@ -4,10 +4,14 @@
 const path = require('path');
 const ReportFormat = require(path.resolve(__dirname, './lib/ReportFormat.js'));
 const HtmlOutput = require(path.resolve(__dirname, './lib/HtmlOutput.js'));
+const PathHelper = require(path.resolve(__dirname, './lib/PathHelper.js'));
 const Promise = require('bluebird');
 
-// Config
-const conf = require(path.resolve(__dirname, './conf/conf.json'));
+// Config, with Absolute Paths for components
+const conf = PathHelper.absolutePathConfig(
+  require(path.resolve(__dirname, './conf/conf.json')),
+  __dirname
+);
 
 /**
  * Main Report Script
@@ -48,29 +52,29 @@ if (!arguments) {
 // How many CLI queries were we passed
 let queries = [];
 let modifiers = {
-  excludeDone: false
+  excludeDone: false,
 };
 
 for (let j = 2; j < process.argv.length; j++) {
   let param = process.argv[j];
   if (param.startsWith('--')) {
     // it's a cli modifier, so set it
-    switch (param.toLowerCase()) {
-      case '--excludedone':
-        modifiers.excludeDone = true;
+    if (param.toLowerCase() === '--excludedone') {
+      modifiers.excludeDone = true;
     }
   } else {
     // it's a query so add it to that array
     queries.push(process.argv[j]);
   }
-
 }
 // Set an array to hold our promises
 let promiseArray = [];
 let promiseResults = [];
 
 // Execute the search
-promiseArray.push(() => ReportFormat.printSearchReport(queries, boardToSearch, modifiers));
+promiseArray.push(() =>
+  ReportFormat.printSearchReport(queries, boardToSearch, modifiers)
+);
 
 // With all the promises in an array, now we want to fire each in sequence and capture results
 Promise.each(promiseArray, (aPromise, index, length) => {
@@ -81,13 +85,10 @@ Promise.each(promiseArray, (aPromise, index, length) => {
   });
 })
   .then(() => {
-    switch (outputFormat) {
-      case 'html':
-        HtmlOutput.finalOutput(promiseResults, conf, __dirname);
-        break;
-      default:
-        // Otherwise, just outputFormat raw, but as a string with no delimiters
-        console.log(promiseResults.join(''));
+    if (outputFormat === 'html') {
+      HtmlOutput.finalOutput(promiseResults, conf, __dirname);
+    } else {
+      console.log(promiseResults.join(''));
     }
   })
   .catch(error => {

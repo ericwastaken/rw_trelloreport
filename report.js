@@ -1,12 +1,17 @@
 #!/usr/local/bin/node
 
 // Imports
+const path = require('path');
 const ReportFormat = require(path.resolve(__dirname, './lib/ReportFormat.js'));
 const HtmlOutput = require(path.resolve(__dirname, './lib/HtmlOutput.js'));
+const PathHelper = require(path.resolve(__dirname, './lib/PathHelper.js'));
 const Promise = require('bluebird');
 
-// Constants
-const conf = require(path.resolve(__dirname, './conf/conf.json'));
+// Config, with Absolute Paths for components
+const conf = PathHelper.absolutePathConfig(
+  require(path.resolve(__dirname, './conf/conf.json')),
+  __dirname
+);
 
 /**
  * Main Report Script
