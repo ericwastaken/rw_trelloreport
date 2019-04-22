@@ -1,2 +1,5 @@
 tasks:
 - command: .gitpod/gitpod-bootstrap.sh
+ports:
+  - port: 8080
+    onOpen: notify
