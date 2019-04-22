@@ -62,6 +62,12 @@ for (let j = 2; j < process.argv.length; j++) {
     if (param.toLowerCase() === '--excludedone') {
       modifiers.excludeDone = true;
     }
+    if (param.toLowerCase() === '--sortbytaskcount-lessfirst') {
+      modifiers.sortByTaskCountLessFirst = true;
+    }
+    if (param.toLowerCase() === '--sortbytaskcount-morefirst') {
+      modifiers.sortByTaskCountMoreFirst = true;
+    }
   } else {
     // it's a query so add it to that array
     queries.push(process.argv[j]);

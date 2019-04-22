@@ -229,7 +229,7 @@ node report | pbcopy
 
 > Note: See the 'Configuration' and 'Authentication' sections above for pre-requisites to being able to run reports.
 
-To generate a report based on a search on macOs or Linux, change into the root directory where this tool is installed and type:
+To generate a report based on a search, change into the root directory where this tool is installed and type:
 
 ```bash
 node search "some search string"
@@ -240,10 +240,73 @@ The above will perform a WHOLE WORD search.
 To search for all cards where a specific user is a member:
 
 ```bash
-node search "@johnnyappleseed"
+node search @johnnyappleseed
 
 ```
-You can find a username easily in the Trello interface by typing a message to a user with the "@" sign.
+
+You can find a username easily in the Trello interface by typing a message to a user with the "@" sign. Note that since Trello usernames are a single string with no whitespace, you don't need to quote these.
+
+### Multiple Search Criteria
+
+It is possible to add more than one search criteria. For example to search for cards that are assiged to several members, you can use:
+
+```bash
+node search @johnnyappleseed @donkeykong @joeybagofdoughnuts
+
+```
+
+It's even possible to combine both strings and member searches:
+
+```bash
+node search @johnnyappleseed "kotlin apprentice" @rosalinda "Tryout"
+
+```
+
+The above example will return all cards that match any of:
+- either of the members @johnnyappleseed and @rosalinda
+- either of the string matches "kotlin apprentice" and "Tryout"
+
+> **Note:** Keyword searches still need to be quoted to avoid being treated as separate searches.
+
+### Additional Search Parameters
+
+In addition to multiple search criteria, you can also control how the output is generated with the following parameters.
+
+**Excluding Cards that are Done**
+
+You can exclude cards that are **Done** by passing a parameter.
+
+```bash
+node search @johnnyappleseed --excludedone
+
+```
+
+The above returns all cards that match @johnnyappleseed, except those in the **Done** list.
+
+**Sorting by the number of cards returned**
+
+You can ask for the output to be sorted by the number of cards (task count) in each search criteria group. This is only useful if you pass more than one search criteria!
+
+```bash
+node search @johnnyappleseed @roaslinda @donkeykong --sortbytaskcount-lessfirst
+
+```
+
+The above example returns all cards that match @johnnyappleseed, @roaslinda and @donkeykong but the order of the result will be by the search group that has *less* cards.
+
+Similarly, you can order by *more cards* first as follows:
+
+```bash
+node search @johnnyappleseed @roaslinda @donkeykong --sortbytaskcount-morefirst
+
+```
+
+Please refer to the directory **/advanced-examples/** for some examples of how to use multiple search criteria and search parameters.
+
+What can these be used for? For instance, you can see all FPEs with their current assignments in ascending order (less cards first) to see which FPE is less busy at the moment.
+
+
+
 
 ## Platform Note
 
@@ -262,11 +325,15 @@ Trello API Documentation:
 
 - When the config is set to HTML output, replace *card_output_format* and *list_name_format* with a more robust template like pug/jade or mustache. This could also consolidate the report-layout.html and report-styles.css into the single file for easier editing. This feature must not affect TEXT output!
 - Add support for multiple boards in *conf.json* + add a command line to choose which board to report on. If none provided, we can exit with error OR provide a list for input?
-- Add an easier way to access API KEY, TOKEN if possible.
-- Add an easier way to figure out and configure Board Id, Lists Ids.
+- Add an easier way to access API KEY, TOKEN if possible, for the initial configuration.
+- Add an easier way to figure out and configure Board Id, Lists Ids during initial configuration.
 
 ## Changelog
 
+- v1.1.4
+  - Added path independence, so that the scripts can be called from any path, yet they still find the ./conf/conf.json properly.
+  - Added SORT to the search.js script so that one can sort the results by the number of lines (which in our case is the number of tasks assigned to a person, or the number of tasks that matched a particular search.) Order can be ascending or descending.
+  - README.md updated to show examples and discuss **search.js**.
 - v1.1.3
   - Tweaks to the README to make it more generic.
   - Implemented GitPod support.

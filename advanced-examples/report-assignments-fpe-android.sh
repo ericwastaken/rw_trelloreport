@@ -2,7 +2,7 @@
 
 BASH_SCRIPT_PATH=$(cd `dirname $0` && pwd)
 
-node ${BASH_SCRIPT_PATH}/../search.js --excludeDone \
+node ${BASH_SCRIPT_PATH}/../search.js --excludeDone --sortbytaskcount-lessfirst \
   @vijaysharm \
   @godfredafful  \
   @taingmeng  \
@@ -11,4 +11,11 @@ node ${BASH_SCRIPT_PATH}/../search.js --excludeDone \
   @jenn_bailey  \
   @victoriagonda5  \
   @nisrulz  \
+  @aldo291 \
+  @filipbabic4 \
   @joe_howard
+
+
+
+
+
