@@ -18,9 +18,6 @@ if [[ ! -f .gitpod/gitpod-bootstrap.log ]]; then
     cp ./conf/report-layout-sample.html ./conf/report-layout.html
     cp ./conf/report-styles-sample.css ./conf/report-styles.css
 
-    # Install npm web server
-    npm install http-server -g
-
     # Set the file to indicate that bootstrap has already ran.
     echo "Boostrap ran on $(date)" > .gitpod/gitpod-bootstrap.log
 else
@@ -31,7 +28,7 @@ fi
 # Start the web server (in the background)
 echo ""
 echo "Starting a web server for the './output' directory (backgrounded)."
-nohup http-server ./output -c-1 &>/dev/null &
+nohup ./node_modules/.bin/http-server ./output -c-1 &>/dev/null &
 disown
 echo "Web server started. You should see a prompt to open a browser tab or to use the preview in GitPod."
 echo "Don't see it? No problem. Point a tab in your browser to: $(gp url 8080)"
