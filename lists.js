@@ -1,11 +1,16 @@
 #!/usr/local/bin/node
 
 // Imports
+const path = require('path');
 const Promise = require('bluebird');
-const TrelloApi = require('./lib/TrelloApi.js');
+const TrelloApi = require(path.resolve(__dirname, './lib/TrelloApi.js'));
+const PathHelper = require(path.resolve(__dirname, './lib/PathHelper.js'));
 
-// Config
-const conf = require('./conf/conf.json');
+// Config, with Absolute Paths for components
+const conf = PathHelper.absolutePathConfig(
+  require(path.resolve(__dirname, './conf/conf.json')),
+  __dirname
+);
 
 /**
  * This is autility script to provide the IDs of all the lists in a board as configured in board.id in the conf.js.

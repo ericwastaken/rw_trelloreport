@@ -1,6 +1,8 @@
 #!/bin/bash
 
-node ../search.js --excludeDone \
+BASH_SCRIPT_PATH=$(cd `dirname $0` && pwd)
+
+node ${BASH_SCRIPT_PATH}/../search.js --excludeDone \
   @vijaysharm \
   @godfredafful  \
   @taingmeng  \
