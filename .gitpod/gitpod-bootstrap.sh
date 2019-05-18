@@ -25,6 +25,14 @@ else
     cat .gitpod/gitpod-bootstrap.log
 fi
 
+# Start the web server (in the background)
+echo ""
+echo "Starting a web server for the './output' directory (backgrounded)."
+nohup ./node_modules/.bin/http-server ./output -c-1 &>/dev/null &
+disown
+echo "Web server started. You should see a prompt to open a browser tab or to use the preview in GitPod."
+echo "Don't see it? No problem. Point a tab in your browser to: $(gp url 8080)"
+
 # User Output
 echo ""
 echo "Please review the README.md for configuration of this tool so it can report on YOUR Trello boards!"

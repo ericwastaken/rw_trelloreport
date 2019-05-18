@@ -384,10 +384,12 @@ Trello API Documentation:
 
 ## Wish List
 
-- When the config is set to HTML output, replace *card_output_format* and *list_name_format* with a more robust template like pug/jade or mustache. This could also consolidate the report-layout.html and report-styles.css into the single file for easier editing. This feature must not affect TEXT output!
-- Add support for multiple boards in *conf.json* + add a command line to choose which board to report on. If none provided, we can exit with error OR provide a list for input?
-- Add an easier way to access API KEY, TOKEN if possible, for the initial configuration.
-- Add an easier way to figure out and configure Board Id, Lists Ids during initial configuration.
+- (Low Effort) Add logic to use a different name for the output of 'search'. Right now, this script shares the output file 'report.html'. Move to 'search.html'.
+- (Low Effort) Add a config option and corresponding logic to name the output file using a timestamp. For example something like 'report-20190422-032219.html'.
+- (High Effort) When the config is set to HTML output, replace *card_output_format* and *list_name_format* with a more robust template like pug/jade or mustache. This could also consolidate the report-layout.html and report-styles.css into the single file for easier editing. This feature must not affect TEXT output!
+- (Medium Effort) Add support for multiple boards in *conf.json* + add a command line to choose which board to report on. If none provided, we can exit with error OR provide a list for input?
+- (High Effort / Maybe not even possible) Add an easier way to access API KEY, TOKEN if possible, for the initial configuration.
+- (High Effort / Maybe not even possible) Add an easier way to figure out and configure Board Id, Lists Ids during initial configuration.
 
 ## Changelog
 

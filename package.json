@@ -19,6 +19,7 @@
     "request-promise": "^4.2.2",
     "resolve-path": "~1.4.0",
     "shell-exec": "^1.0.1",
-    "showdown": "^1.8.6"
+    "showdown": "^1.8.6",
+    "http-server": "^0.11.1"
   }
 }
