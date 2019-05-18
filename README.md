@@ -246,27 +246,91 @@ node search @johnnyappleseed
 
 You can find a username easily in the Trello interface by typing a message to a user with the "@" sign. Note that since Trello usernames are a single string with no whitespace, you don't need to quote these.
 
-### Multiple Search Criteria
+You may combine a username search with a string search like this:
 
-It is possible to add more than one search criteria. For example to search for cards that are assiged to several members, you can use:
+```bash
+node search "some search string @johnnyappleseed"
+
+```
+
+### Search Operators
+
+It is possible to search for cards with search operators. Search operators help you find specific cards. You can add “-” to a search operator to do a negative search. For example **-has:members** will search for cards with no members.
+
+Borrowing from the [Trello API Docs for Search](https://developers.trello.com/reference#search):
+
+- **\#label** - Returns labeled cards. label: also works.
+- **list:name** - Returns cards within the list named “name”. Or whatever you type besides “name”.
+- **has:attachments** - Returns cards with attachments. has:description, has:cover, has:members, and has:stickers also work as you would expect.
+- **due:day** - Returns cards due within 24 hours. due:week, due:month, and due:overdue also work as expected. You can search for a specific day range. For example, adding due:14 to search will include cards due in the next 14 days. You can also search for due:complete or due:incomplete to search for due dates that are marked as complete or incomplete.
+- **created:day** - Returns cards created in the last 24 hours. created:week and created:month also work as expected. You can search for a specific day range. For example, adding created:14 to the search will include cards created in the last 14 days.
+- **edited:day** - Returns cards edited in the last 24 hours. edited:week and edited:month also work as expected. You can search for a specific day range. For example, adding edited:21 to the search will include cards edited in the last 21 days.
+- **description:**, **checklist:**, **comment:**, and **name:** - Returns cards matching the text of card descriptions, checklists, comments, or names. For example, comment:"FIX IT" will return cards with “FIX IT” in a comment.
+- **is:open** and **is:archived** - Returns cards that are either open or archived. Trello returns both types by default.
+
+For instance, you can search for overdue cards:
+
+```bash
+node search "due:overdue"
+
+```
+
+Combining Search Operators with username queries, it is then possible to find cards for a specific user, edited in a range (7 days in this example):
+
+```bash
+node search "@johnnyappleseed edited:7"
+
+```
+
+Or even overdue cards with a certain member:
+
+```bash
+node search "@johnnyappleseed due:overdue"
+
+```
+
+### Sort Operators
+
+It is possible to control the sort of any query with the following:
+
+- **sort:created** - Sorts cards by date created. **sort:edited** and **sort:due** also work as expected.
+
+> **Note:** Sort Operators should not be used with the **--sortbytaskcount** parameter below.
+
+### Multiple Searches
+
+It is possible to perform more than one search in a single report. For example to search for cards that are assigned to several members, you can use:
 
 ```bash
 node search @johnnyappleseed @donkeykong @joeybagofdoughnuts
 
 ```
 
-It's even possible to combine both strings and member searches:
+Note that each of the names above will produce a group of cards in the same report!
+
+It's even possible to combine both strings and member searches in a single report:
 
 ```bash
 node search @johnnyappleseed "kotlin apprentice" @rosalinda "Tryout"
 
 ```
 
-The above example will return all cards that match any of:
-- either of the members @johnnyappleseed and @rosalinda
-- either of the string matches "kotlin apprentice" and "Tryout"
+The above example will return several groups of cards that match:
+- a group of cards each for the members @johnnyappleseed and @rosalinda
+- a group of cards each for the string matches "kotlin apprentice" and "Tryout"
 
 > **Note:** Keyword searches still need to be quoted to avoid being treated as separate searches.
+
+However, the above will return 4 groups of cards. Note how this is different than:
+
+```bash
+node search "@johnnyappleseed kotlin apprentice @rosalinda Tryout"
+
+```
+
+The above will return a single group of cards all of which match all the criteria:
+- All cards will have both @johhnyappleseed and @rosalinda as members
+- All cards will match the strings "kotlin" "apprentice" "Tryout"
 
 ### Additional Search Parameters
 
@@ -305,9 +369,6 @@ Please refer to the directory **/advanced-examples/** for some examples of how t
 
 What can these be used for? For instance, you can see all FPEs with their current assignments in ascending order (less cards first) to see which FPE is less busy at the moment.
 
-
-
-
 ## Platform Note
 
 This has been tested under macOS High Sierra, Linux, NodeJS 8.9.0 and NodeJS 10.15.3. It very likely workds under other versions of macOS, and Windows as well as other NodeJS versions, but I've not tested.
@@ -330,6 +391,9 @@ Trello API Documentation:
 
 ## Changelog
 
+- v1.1.5
+  - Enhanced the **search.js** script to add the user's Full Name in the search results header for **@username** searches.
+  - Added details in README.md about **Trello Search Operators** with examples. 
 - v1.1.4
   - Added path independence, so that the scripts can be called from any path, yet they still find the ./conf/conf.json properly.
   - Added SORT to the search.js script so that one can sort the results by the number of lines (which in our case is the number of tasks assigned to a person, or the number of tasks that matched a particular search.) Order can be ascending or descending.
