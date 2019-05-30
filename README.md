@@ -20,7 +20,7 @@ For support, contact the author.
 
 GitPod is an easy way to use this tool without needing to download or install anything on your workstation. Simply click on the **Open in GitPod** icon to launch a virtual machine (using Docker) that will allow you to run this tool.
 
-Although GitPod provides everything you need to run this tool, you do need to configure a few items. Wehn you start a GitPod workspace, a script will reset all the config files to sample versions. After GitPod has come up, simply edit the files to contain your details! You can edit these files right inside your GitPod workspace.
+Although GitPod provides everything you need to run this tool, you do need to configure a few items. When you start a GitPod workspace, a script will reset all the config files to sample versions. After GitPod has come up, simply edit the files to contain your details! You can edit these files right inside your GitPod workspace.
 
 > **Note:** When you're done with your GitPod workspace edits, you'll want to come back to the same workspace so that you don't have to repeat the edits! Simply go to your **GitPod Dashboard** to restart any workspaces you created before.
 
@@ -52,7 +52,7 @@ If you plan to use HTML Output, you could also edit the following (if you don't 
 - copy **./conf/report-layout-sample.html** to **./conf/report-layout.html**.
 - copy **./conf/report-styles-sample.css** to **./conf/report-styles.css**.
 
-In macOs and Linux you can copy the sample files to your own versions with:
+In macOS and Linux you can copy the sample files to your own versions with:
 ```bash
 $ cp ./conf/secrets-sample.json ./conf/secrets.json
 $ cp ./conf/conf-sample.json ./conf/conf.json
@@ -72,7 +72,7 @@ To generate your key and token:
 - Visit https://trello.com/app-key. This page displays your API KEY.
 - From that same page you can generate a token for yourself: "_If you are looking to build an application for yourself, or are doing local testing, you can manually generate a Token._"
 
-Copy both your API KEY and TOKEN to **./conf/conf.json**.
+Copy both your API KEY and TOKEN to **./conf/secrets.json**.
 
 **CAUTION:** The API KEY and TOKEN must be protected since they allow anyone in control of them with full access to your Trello account! For this reason, the file **secrets.json** is not included in the repository!
 
@@ -211,14 +211,14 @@ Also, take note of the 'board id' and add it to your **conf.json** under **board
 
 > Note: See the 'Configuration' and 'Authentication' sections above for pre-requisites to being able to run reports.
 
-To generate a report on macOs or Linux, change into the root directory where this tool is installed and type:
+To generate a report on macOS or Linux, change into the root directory where this tool is installed and type:
 
 ```bash
 node report
 
 ```
 
-On macOs, you can redirect the script's output to the clipboard with:
+On macOS, you can redirect the script's output to the clipboard with:
 
 ```bash
 node report | pbcopy
