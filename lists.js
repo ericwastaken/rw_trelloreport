@@ -15,18 +15,18 @@ const CommandLineHelper = require(path.resolve(
 const program = require('commander');
 const assert = require('chai').assert;
 
-// Setup our CLI options, specifically get --reportkey
-CommandLineHelper.programSetupForReportKey(
+// Setup our CLI options, specifically get --boardkey
+CommandLineHelper.programSetupForBoardKey(
   program,
   `Returns information about all the lists in a Trello bard.`
 );
-assert(program.reportkey, `Unable to continue without reportkey.`);
+assert(program.boardkey, `Unable to continue without boardkey.`);
 
 // Config, with Absolute Paths for components
 const conf = ConfigHelper.loadReportConfig(
   require(path.resolve(__dirname, './conf/conf.json')),
   __dirname,
-  program.reportkey
+  program.boardkey
 );
 
 /**
