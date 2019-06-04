@@ -1,5 +1,14 @@
 #!/usr/local/bin/node
 
+/**
+ * Main Search Script
+ *
+ * This script will search then generate a report for a search.
+ *
+ * See README.md for details about the config.
+ *
+ */
+
 // Global overrides
 // Use Bluebird Promises
 global.Promise = require('bluebird');
@@ -29,20 +38,6 @@ const conf = ConfigHelper.loadReportConfig(
   __dirname,
   program.boardkey
 );
-
-/**
- * Main Report Script
- *
- * This script will generate a report for a search using the user's current scope
- * (all the organizations/boards that the user has access to).
- *
- * If the search term starts with '@', then the search will be for a "member" on
- * cards.
- *
- * When outputFormat is set to html or rtf, we expect the conf 'card_output_format'
- * to contain markdown which will then converted into html/rtf.
- *
- */
 
 // Output format (html, rtf, text, or anything else for text)
 let outputFormat = 'text';

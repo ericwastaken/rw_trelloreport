@@ -1,5 +1,14 @@
 #!/usr/local/bin/node
 
+/**
+ * Main Report Script
+ *
+ * This script will generate a report for a board and lists configured in ./conf/conf.json.
+ *
+ * See README.md for details about the config.
+ *
+ */
+
 // Global overrides
 // Use Bluebird Promises
 global.Promise = require('bluebird');
@@ -29,16 +38,6 @@ const conf = ConfigHelper.loadReportConfig(
   __dirname,
   program.boardkey
 );
-
-/**
- * Main Report Script
- *
- * This script will generate a report for a board and lists configured in ./conf/conf.json.
- *
- * When outputFormat is set to html or rtf, we expect the conf 'card_output_format' and 'list_name_format'
- * to contain markdown which will then converted into html/rtf.
- *
- */
 
 // Output format (html, rtf, text, or anything else for text)
 let outputFormat = 'text';

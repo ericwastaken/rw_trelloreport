@@ -1,5 +1,12 @@
 #!/usr/local/bin/node
 
+/**
+ * This is a utility script to provide the IDs of all the lists in a board as configured in board.id in the conf.js.
+ *
+ * See README.md for details about the config.
+ *
+ */
+
 // Global overrides
 // Use Bluebird Promises
 global.Promise = require('bluebird');
@@ -28,12 +35,6 @@ const conf = ConfigHelper.loadReportConfig(
   __dirname,
   program.boardkey
 );
-
-/**
- * This is a utility script to provide the IDs of all the lists in a board as configured in board.id in the conf.js.
- * Syntax:
- *   `./lists.js`
- */
 
 const boardId = conf['board']['urlId'];
 
