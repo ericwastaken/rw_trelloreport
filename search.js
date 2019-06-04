@@ -17,11 +17,11 @@ const CommandLineHelper = require(path.resolve(
 const assert = require('chai').assert;
 
 // Setup our CLI options, specifically get --reportkey
-CommandLineHelper.programSetupForReportKey(
+CommandLineHelper.programSetupForSearch(
   program,
   `Returns information about all the lists in a Trello bard.`
 );
-assert(program.reportkey,`Unable to continue without reportkey.`);
+assert(program.reportkey, `Unable to continue without reportkey.`);
 
 // Config, with Absolute Paths for components
 const conf = ConfigHelper.loadReportConfig(
@@ -72,19 +72,22 @@ let modifiers = {
   excludeDone: false,
 };
 
+// Set modifiers from commander command line arguments
+if (program.excludedone) {
+  modifiers.excludeDone = true;
+}
+if (program.sortbytaskcountLessfirst) {
+  modifiers.sortByTaskCountLessFirst = true;
+}
+if (program.sortbytaskcountMorefirst) {
+  modifiers.sortByTaskCountMoreFirst = true;
+}
+
+// Set the queries from the command line, ignoring command line arguments that start with '-' or '--'
 for (let j = 2; j < process.argv.length; j++) {
   let param = process.argv[j];
-  if (param.startsWith('--')) {
-    // it's a cli modifier, so set it
-    if (param.toLowerCase() === '--excludedone') {
-      modifiers.excludeDone = true;
-    }
-    if (param.toLowerCase() === '--sortbytaskcount-lessfirst') {
-      modifiers.sortByTaskCountLessFirst = true;
-    }
-    if (param.toLowerCase() === '--sortbytaskcount-morefirst') {
-      modifiers.sortByTaskCountMoreFirst = true;
-    }
+  if (param.startsWith('--') || param.startsWith('-')) {
+    // it's a cli argument, so ignore it. We've handled those already.
   } else {
     // it's a query so add it to that array
     queries.push(process.argv[j]);
