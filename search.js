@@ -68,7 +68,7 @@ let modifiers = {
 };
 
 // Set modifiers from commander command line arguments
-if (program.excludedone) {
+if (program.excludeDone) {
   modifiers.excludeDone = true;
 }
 if (program.sortbytaskcountLessfirst) {
