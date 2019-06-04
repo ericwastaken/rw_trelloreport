@@ -24,6 +24,8 @@ const CommandLineHelper = require(path.resolve(
   './lib/CommandLineHelper.js'
 ));
 const assert = require('chai').assert;
+const getStdin = require('get-stdin');
+const stringArgv = require('string-argv');
 
 // Setup our CLI options, specifically get --boardkey
 CommandLineHelper.programSetupForSearch(
@@ -78,41 +80,49 @@ if (program.sortbytaskcountMorefirst) {
   modifiers.sortByTaskCountMoreFirst = true;
 }
 
-// Set the queries from the command line, ignoring command line arguments that start with '-' or '--'
-for (let j = 2; j < process.argv.length; j++) {
-  let param = process.argv[j];
-  if (param.startsWith('--') || param.startsWith('-')) {
-    // it's a cli argument, so ignore it. We've handled those already.
-  } else {
-    // it's a query so add it to that array
-    queries.push(process.argv[j]);
-  }
+// Set the queries from the command line. Note that Commander automatically extracts
+// command line arguments that start with '-' or '--'
+for (let j = 0; j < program.args.length; j++) {
+  queries.push(program.args[j]);
 }
-// Set an array to hold our promises
-let promiseArray = [];
-let promiseResults = [];
 
-// Execute the search
-promiseArray.push(() =>
-  ReportFormat.printSearchReport(queries, boardToSearch, modifiers, conf)
-);
-
-// With all the promises in an array, now we want to fire each in sequence and capture results
-Promise.each(promiseArray, (aPromise, index, length) => {
-  // Process the one promise (one at a time)
-  return aPromise().then(outputString => {
-    // Save our string from the promise step into the promiseResults array so we can process it later
-    promiseResults[index] = outputString;
-  });
-})
-  .then(() => {
-    if (outputFormat === 'html') {
-      HtmlOutput.finalOutput(promiseResults, conf, __dirname);
-    } else {
-      console.log(promiseResults.join(''));
+// Process any stdin queries (we only support queries via stdin)
+// Then proceed with the searches
+getStdin()
+  .then(stdin => {
+    let stdinArray = stringArgv.parseArgsStringToArgv(stdin);
+    // Set the queries from stdin.
+    for (let j = 0; j < stdinArray.length; j++) {
+      queries.push(stdinArray[j]);
     }
   })
-  .catch(error => {
-    // We have some error, outputFormat information about it.
-    console.log(`{ "Error": "`, error, `"}`);
+  .then(() => {
+    // Set an array to hold our promises
+    let promiseArray = [];
+    let promiseResults = [];
+
+    // Execute the search
+    promiseArray.push(() =>
+      ReportFormat.printSearchReport(queries, boardToSearch, modifiers, conf)
+    );
+
+    // With all the promises in an array, now we want to fire each in sequence and capture results
+    Promise.each(promiseArray, (aPromise, index, length) => {
+      // Process the one promise (one at a time)
+      return aPromise().then(outputString => {
+        // Save our string from the promise step into the promiseResults array so we can process it later
+        promiseResults[index] = outputString;
+      });
+    })
+      .then(() => {
+        if (outputFormat === 'html') {
+          HtmlOutput.finalOutput(promiseResults, conf, __dirname);
+        } else {
+          console.log(promiseResults.join(''));
+        }
+      })
+      .catch(error => {
+        // We have some error, outputFormat information about it.
+        console.log(`{ "Error": "`, error, `"}`);
+      });
   });
