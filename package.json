@@ -9,7 +9,6 @@
   "author": "E.A.Soto",
   "license": "",
   "dependencies": {
-    "axios": "^0.18.0",
     "bluebird": "^3.5.1",
     "date-arithmetic": "^3.1.0",
     "dateformat": "^3.0.3",
