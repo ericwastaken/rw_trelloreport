@@ -500,6 +500,9 @@ Trello API Documentation:
   - Note that the new multi-board config file is referred to as a v2.x config. The previous 'single board' config is now referred to as a v1.x config.
   - This version still supports the v1.x config for backwards compatibility. 
   - All the scripts can be run without the **--boardkey** argument in which case they act upon the one board in a v1.x config OR the board with **"boardkey": "default"** in a v2.x config.
+  - Support for "includeNames" in board configs so that a board can be configured to only include certain cards that match one of a list of strings.
+  - Fixes to "excludeNames" to work properly with an array of strings and to use a "contains" search rather than a full text match.
+  - Added support for `listName` in a card's output.
 - v1.1.5
   - Enhanced the **search.js** script to add the user's Full Name in the search results header for **@username** searches.
   - Added details in README.md about **Trello Search Operators** with examples. 
