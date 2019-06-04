@@ -17,19 +17,22 @@
           "key": "convenience list name 1",
           "id": "TRELLO-LIST-ID-01",
           "excludeTryouts": true,
-          "excludeNames": []
+          "excludeNames": [],
+          "includeNames": []
         },
         {
           "key": "convenience list name 2",
           "id": "TRELLO-LIST-ID-02",
           "excludeTryouts": true,
-          "excludeNames": []
+          "excludeNames": [],
+          "includeNames": []
         },
         {
           "key": "convenience list name 3",
           "id": "TRELLO-LIST-ID-03",
           "excludeTryouts": true,
-          "excludeNames": []
+          "excludeNames": [],
+          "includeNames": []
         }
       ],
       "output": {

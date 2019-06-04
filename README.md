@@ -145,13 +145,15 @@ The **lists** array in **conf.json** is an array of the following, repeated once
   "key": "convenience list name 1",
   "id": "TRELLO-LIST-ID-01",
   "excludeTryouts": true,
-  "excludeNames": []
+  "excludeNames": [],
+  "includeNames": [],
 }
 ```
 - **key** - (a string) is just a convenience key so that the config is easier to read. It's not actually used anywhere in the code.
 - **id** - (a string) this is the id of the list you wish to print card from. See below for a script part of this tool that shows you all your list IDs.
 - **excludeTryouts** - (true/false) if the list item has this set to **true**, then any cards for "tryouts" will not output. Otherwise, "tryouts" will output. This is useful for the later phases (edit, fpe, etc) where seeing the tutorial on the board is useful and important.
-- **excludeNames** - (an array of strings) if there are any cards that you wish to exclude in the output, enter their names in this array of strings. This is useful to skip printing "label" type cards that are sometimes used in boards.
+- **excludeNames** - (an array of strings) if there are any cards that you wish to exclude in the output, enter part of their names in this array of strings. This is useful to skip printing "label" type cards that are sometimes used in boards. When multiple strings are provided, a match on any one string will cause the card to be excluded.
+- **includeNames** - (an array of strings) the opposite to **excludeNames**, if you want to include only cards that contain a certain string in the name, enter the strings in this array of strings. This is useful to select only certain cards that have a string in their title. When multiple strings are provided, a match on any one string will cause the card to be included.
 
 ### Configuring report output
 
