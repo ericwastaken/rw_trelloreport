@@ -24,7 +24,7 @@ describe('ConfigHelper Tests', () => {
       'v2.x array should have exactly one item.'
     ).to.be.eq(1);
     expect(
-      normalizedConfig[0]['reportKey'],
+      normalizedConfig[0]['reportkey'],
       'v2.x array property reportKey should have come back with a value.'
     ).to.not.be.empty;
   });
@@ -55,7 +55,7 @@ describe('ConfigHelper Tests', () => {
     ).to.be.an('object');
     // Check for the specific reportKey, in this case, 'default' since the starting config was a v1.x
     expect(
-      reportConfig['reportKey'],
+      reportConfig['reportkey'],
       `The reportKey did not come back with 'default'.`
     ).to.be.equal('default');
     // Check one of the properties we expect to have gotten a path.
@@ -71,7 +71,7 @@ describe('ConfigHelper Tests', () => {
     // Set a test case with the v1.x config structure (which was a direct object and not an array)
     let configv2x = [
       {
-        reportKey: reportKeyToTestFor,
+        reportkey: reportKeyToTestFor,
         board: {
           output: {
             outputFormat: 'html',
@@ -96,7 +96,7 @@ describe('ConfigHelper Tests', () => {
     ).to.be.an('object');
     // Check for the specific reportKeyToTestFor, in this case, matching the passed config
     expect(
-      reportConfig['reportKey'],
+      reportConfig['reportkey'],
       `The reportKey did not come back with '${reportKeyToTestFor}'.`
     ).to.be.equal(reportKeyToTestFor);
     // Check one of the properties we expect to have gotten a path.

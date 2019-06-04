@@ -9,11 +9,25 @@ const path = require('path');
 const ReportFormat = require(path.resolve(__dirname, './lib/ReportFormat.js'));
 const HtmlOutput = require(path.resolve(__dirname, './lib/HtmlOutput.js'));
 const ConfigHelper = require(path.resolve(__dirname, './lib/ConfigHelper.js'));
+const program = require('commander');
+const CommandLineHelper = require(path.resolve(
+  __dirname,
+  './lib/CommandLineHelper.js'
+));
+const assert = require('chai').assert;
+
+// Setup our CLI options, specifically get --reportkey
+CommandLineHelper.programSetupForReportKey(
+  program,
+  `Returns information about all the lists in a Trello bard.`
+);
+assert(program.reportkey,`Unable to continue without reportkey.`);
 
 // Config, with Absolute Paths for components
 const conf = ConfigHelper.loadReportConfig(
   require(path.resolve(__dirname, './conf/conf.json')),
-  __dirname
+  __dirname,
+  program.reportkey
 );
 
 /**

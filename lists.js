@@ -8,15 +8,29 @@ global.Promise = require('bluebird');
 const path = require('path');
 const TrelloApi = require(path.resolve(__dirname, './lib/TrelloApi.js'));
 const ConfigHelper = require(path.resolve(__dirname, './lib/ConfigHelper.js'));
+const CommandLineHelper = require(path.resolve(
+  __dirname,
+  './lib/CommandLineHelper.js'
+));
+const program = require('commander');
+const assert = require('chai').assert;
+
+// Setup our CLI options, specifically get --reportkey
+CommandLineHelper.programSetupForReportKey(
+  program,
+  `Returns information about all the lists in a Trello bard.`
+);
+assert(program.reportkey, `Unable to continue without reportkey.`);
 
 // Config, with Absolute Paths for components
 const conf = ConfigHelper.loadReportConfig(
   require(path.resolve(__dirname, './conf/conf.json')),
-  __dirname
+  __dirname,
+  program.reportkey
 );
 
 /**
- * This is autility script to provide the IDs of all the lists in a board as configured in board.id in the conf.js.
+ * This is a utility script to provide the IDs of all the lists in a board as configured in board.id in the conf.js.
  * Syntax:
  *   `./lists.js`
  */
