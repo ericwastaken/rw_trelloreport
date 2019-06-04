@@ -1,8 +1,8 @@
-# RayWenderlich Team Lead Trello Report
+# Trello Report
 
 ## Summary
 
-This tool uses the Trello API to pull out lists of cards in the various RW tutorial phases. This tool is written in JavaScript and requires NodeJS 8.x to run.
+This tool uses the Trello API to pull lists of cards and then report/search on them. This tool is written in JavaScript and requires NodeJS 8.x to run.
 
 You can also run this tool via GitPod which requires you to run it inside your browser.
 
@@ -482,6 +482,7 @@ Trello API Documentation:
 
 ## Wish List
 
+- *(Unestimated)* In the lists array, can we generalize **excludeTryouts**? This is very specific to RW but it's probably a string exclusion that we can make into a more generic property.
 - *(Low Effort)* Add logic to use a different name for the output of 'search'. 
   Right now, this script shares the output file 'report.html'. Move to 'search.html'. However, the name comes from the config. Maybe for search we move to a command line argument.
 - *(Low Effort)* Add a config option and corresponding logic to name the output file using a timestamp. For example something like 'report-20190422-032219.html'.
