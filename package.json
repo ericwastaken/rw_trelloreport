@@ -21,5 +21,9 @@
     "shell-exec": "^1.0.1",
     "showdown": "^1.8.6",
     "http-server": "^0.11.1"
+  },
+  "devDependencies": {
+    "mocha": "^6.1.4",
+    "chai": "^4.2.0"
   }
 }

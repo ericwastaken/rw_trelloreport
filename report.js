@@ -1,14 +1,17 @@
 #!/usr/local/bin/node
 
+// Global overrides
+// Use Bluebird Promises
+global.Promise = require('bluebird');
+
 // Imports
 const path = require('path');
 const ReportFormat = require(path.resolve(__dirname, './lib/ReportFormat.js'));
 const HtmlOutput = require(path.resolve(__dirname, './lib/HtmlOutput.js'));
-const PathHelper = require(path.resolve(__dirname, './lib/PathHelper.js'));
-const Promise = require('bluebird');
+const ConfigHelper = require(path.resolve(__dirname, './lib/ConfigHelper.js'));
 
 // Config, with Absolute Paths for components
-const conf = PathHelper.absolutePathConfig(
+const conf = ConfigHelper.loadReportConfig(
   require(path.resolve(__dirname, './conf/conf.json')),
   __dirname
 );

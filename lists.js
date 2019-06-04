@@ -1,13 +1,16 @@
 #!/usr/local/bin/node
 
+// Global overrides
+// Use Bluebird Promises
+global.Promise = require('bluebird');
+
 // Imports
 const path = require('path');
-const Promise = require('bluebird');
 const TrelloApi = require(path.resolve(__dirname, './lib/TrelloApi.js'));
-const PathHelper = require(path.resolve(__dirname, './lib/PathHelper.js'));
+const ConfigHelper = require(path.resolve(__dirname, './lib/ConfigHelper.js'));
 
 // Config, with Absolute Paths for components
-const conf = PathHelper.absolutePathConfig(
+const conf = ConfigHelper.loadReportConfig(
   require(path.resolve(__dirname, './conf/conf.json')),
   __dirname
 );
@@ -18,7 +21,7 @@ const conf = PathHelper.absolutePathConfig(
  *   `./lists.js`
  */
 
-const boardId = conf.board.urlId;
+const boardId = conf['board']['urlId'];
 
 if (!boardId) {
   console.log(`{ "Error": "conf.json does not have 'board.urlId'!"}`);
