@@ -23,7 +23,7 @@ const program = require('commander');
 const assert = require('chai').assert;
 
 // Setup our CLI options, specifically get --boardkey
-CommandLineHelper.programSetupForBoardKey(
+CommandLineHelper.programSetupReport(
   program,
   `Returns information about all the lists in a Trello bard.`
 );

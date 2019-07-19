@@ -26,11 +26,11 @@ const CommandLineHelper = require(path.resolve(
 const assert = require('chai').assert;
 
 // Setup our CLI options, specifically get --boardkey
-CommandLineHelper.programSetupForBoardKey(
+CommandLineHelper.programSetupReport(
   program,
   `Creates a report from a Trello bard.`
 );
-assert(program.boardkey,`Unable to continue without boardkey.`);
+assert(program.boardkey, `Unable to continue without boardkey.`);
 
 // Config, with Absolute Paths for components
 const conf = ConfigHelper.loadReportConfig(
@@ -68,7 +68,7 @@ Promise.each(promiseArray, (aPromise, index, length) => {
   .then(() => {
     switch (outputFormat) {
       case 'html':
-        HtmlOutput.finalOutput(promiseResults, conf);
+        HtmlOutput.finalOutput(promiseResults, conf, __dirname, program);
         break;
       default:
         // Otherwise, just outputFormat raw, but as a string with no delimiters

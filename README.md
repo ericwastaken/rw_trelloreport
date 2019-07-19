@@ -542,6 +542,10 @@ Trello API Documentation:
 
 ## Changelog
 
+- v2.0.2
+  - Implemented a CLI argument --outputfilepath that allows the search.js and report.js to set the output file for the search or report.
+  - Implemented a new config property search_query_header_prefix that allows customization of the 'header' for each query in search results.
+  - Replaced the stdin library (previously an npm module) with a custom one that better handles both stdin and no stdin.
 - v2.0.1
   - Introduced multi-board config files. With this version, a config file can be an array of Boards and one board can be selected for a script to work with by passing the command line argument **--boardkey "some-board"**.
   - Introduced Commander for command line argument processing.
