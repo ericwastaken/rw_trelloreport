@@ -24,7 +24,9 @@ const CommandLineHelper = require(path.resolve(
   './lib/CommandLineHelper.js'
 ));
 const assert = require('chai').assert;
-const getStdin = require('get-stdin');
+
+// Bring in Stdin
+const getStdin = require('./lib/StdInHelper.js');
 const stringArgv = require('string-argv');
 
 // Setup our CLI options, specifically get --boardkey
@@ -116,7 +118,7 @@ getStdin()
     })
       .then(() => {
         if (outputFormat === 'html') {
-          HtmlOutput.finalOutput(promiseResults, conf, __dirname);
+          HtmlOutput.finalOutput(promiseResults, conf, __dirname, program);
         } else {
           console.log(promiseResults.join(''));
         }

@@ -99,6 +99,7 @@ A single-board config looks like this:
       "card_fields_search": "name,shortUrl,due,list",
       "card_output_format_search":
         "\n* ${card['name']} - ${dateString}\n  [View in Trello](${card['shortUrl']}) (${card['list']['name']})",
+      "search_query_header_prefix": "",
       "lists": [],
       "output": {}
     }
@@ -134,6 +135,7 @@ Optionally, you may also edit:
 - **empty_list_placeholder** is output when a list has no cards.
 - **card_fields_search** is similar to **card_fields**, these are the fields that will be available in search results.
 - **card_output_format_search** is similar to **card_output_format**, these is the format that will be used in search results.
+- **search_query_header_prefix** used in searches, to give a title to each "query". The string in this property is prepended to the Query statement in the report only.
 - **output** is used to control the type of output you want. It is further described below.
 
 ### Configuring the lists to show
@@ -178,7 +180,8 @@ In addition, if you use **outputFormat** 'html':
 
 If you set the above two values only, then the HTML will output to the console. However, there are two more optional settings:
 
-- **htmlOutputPath** (a string file path) this is used as the path for an output file which will be created by this script. Careful, this script silently replaces an existing repot with the same file name!
+- **htmlOutputPath** (a string file path) this is used as the path for an output file which will be created by this script. Careful, this script silently replaces an existing report with the same file name!
+  > **Note:** This property can be overridden in the command line by passing the "-o", "--outputfilepath" command line argument. See _Additional Search Parameters_ below.
 - **autoOpenOutput** (a boolean) if 'true', then the script will not just output to file, but will perform an `open {otput-file-path}` to cause the file to be opened in your default html handler.
 
 ## How to find your Trello Board and List IDs
@@ -234,6 +237,16 @@ node report | pbcopy
 
 ```
 
+**Controlling the name of the report output file**
+
+Although the output file name can be controlled in the config via the **htmlOutputPath** property, it can also be overridden via a command line argument.
+
+```bash
+node report --outputfilepath "./output/myreport.html"
+node report -o "./output/myreport.html"
+
+```
+
 ## Searching for Cards
 
 > Note: See the 'Configuration' and 'Authentication' sections above for pre-requisites to being able to run reports.
@@ -261,6 +274,17 @@ You may combine a username search with a string search like this:
 node search "some search string @johnnyappleseed"
 
 ```
+
+**Controlling the name of the search result output file**
+
+Although the output file name can be controlled in the config via the **htmlOutputPath** property, it can also be overridden via a command line argument.
+
+```bash
+node search "some search string" --outputfilepath "./output/myreport.html"
+node search @johnnyappleseed -o "./output/myreport.html"
+
+```
+
 
 ### Search Operators
 
