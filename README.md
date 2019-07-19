@@ -1,8 +1,8 @@
-# RayWenderlich Team Lead Trello Report
+# Trello Report
 
 ## Summary
 
-This tool uses the Trello API to pull out lists of cards in the various RW tutorial phases. This tool is written in JavaScript and requires NodeJS 8.x to run.
+This tool uses the Trello API to pull lists of cards and then report/search on them. This tool is written in JavaScript and requires NodeJS 8.x to run.
 
 You can also run this tool via GitPod which requires you to run it inside your browser.
 
@@ -82,30 +82,38 @@ Edit **./conf/conf.json** and enter the details on the Board you want to report 
 
 > **Note:** Other than the various **ids** and the **lists**, the **conf.json** can be used "as is" if it works for you!
 
-The config looks like this:
+A single-board config looks like this:
 
 ```
-"board": {
-  "id": "TRELLO-BOARD-ID",
-  "urlId": "TRELLO-BOARD-URL-ID",
-  "card_fields": "name,shortUrl,due",
-  "card_output_format":
-        "\n* ${card['name']} - ${dateString}\n  [View in Trello](${card['shortUrl']})",
-  "list_name_format": "\n## ${listName}",
-  "empty_list_placeholder": "\n*No tutorials in this phase.*",
-  "card_fields_search": "name,shortUrl,due,list",
-  "card_output_format_search":
-    "\n* ${card['name']} - ${dateString}\n  [View in Trello](${card['shortUrl']}) (${card['list']['name']})",
-  "lists": [],
-  "output": {}
-}
+[
+  {
+    "boardkey": "default",
+    "board": {
+      "id": "TRELLO-BOARD-ID",
+      "urlId": "TRELLO-BOARD-URL-ID",
+      "card_fields": "name,shortUrl,due",
+      "card_output_format":
+            "\n* ${card['name']} - ${dateString}\n  [View in Trello](${card['shortUrl']})",
+      "list_name_format": "\n## ${listName}",
+      "empty_list_placeholder": "\n*No tutorials in this phase.*",
+      "card_fields_search": "name,shortUrl,due,list",
+      "card_output_format_search":
+        "\n* ${card['name']} - ${dateString}\n  [View in Trello](${card['shortUrl']}) (${card['list']['name']})",
+      "search_query_header_prefix": "",
+      "lists": [],
+      "output": {}
+    }
+  } 
+]
 ```
 
-You must edit the following keys:
+> **Note:** See the section **Multi-Board Configuration** if you're interested in being able to operate on more than one board.
 
-- **id** is the Trello id for the board you'll be reporting from. See "How to find the Board and List IDs" further down in this document.
+You must edit the following keys in the 'default' board:
+
+- **id** is the Trello id for the board you'll be working with. See "How to find the Board and List IDs" further down in this document.
   - Board id looks something like this: `5242dbcb52hed1ff1752fdac` (note, this id is not real.)
-- **urlId** is the Trello Url id for the board you'll be reporting from. See "How to find the Board and List IDs" further down in this document.
+- **urlId** is the Trello Url id for the board you'll be working with. See "How to find the Board and List IDs" further down in this document.
   - URL id looks something like this: `a9bcPt5B` (note, this value is not real.)
 - **lists** is an array that defines each of the lists you want to output from. See below for the details of that element.
 
@@ -127,6 +135,7 @@ Optionally, you may also edit:
 - **empty_list_placeholder** is output when a list has no cards.
 - **card_fields_search** is similar to **card_fields**, these are the fields that will be available in search results.
 - **card_output_format_search** is similar to **card_output_format**, these is the format that will be used in search results.
+- **search_query_header_prefix** used in searches, to give a title to each "query". The string in this property is prepended to the Query statement in the report only.
 - **output** is used to control the type of output you want. It is further described below.
 
 ### Configuring the lists to show
@@ -138,13 +147,15 @@ The **lists** array in **conf.json** is an array of the following, repeated once
   "key": "convenience list name 1",
   "id": "TRELLO-LIST-ID-01",
   "excludeTryouts": true,
-  "excludeNames": []
+  "excludeNames": [],
+  "includeNames": [],
 }
 ```
 - **key** - (a string) is just a convenience key so that the config is easier to read. It's not actually used anywhere in the code.
 - **id** - (a string) this is the id of the list you wish to print card from. See below for a script part of this tool that shows you all your list IDs.
 - **excludeTryouts** - (true/false) if the list item has this set to **true**, then any cards for "tryouts" will not output. Otherwise, "tryouts" will output. This is useful for the later phases (edit, fpe, etc) where seeing the tutorial on the board is useful and important.
-- **excludeNames** - (an array of strings) if there are any cards that you wish to exclude in the output, enter their names in this array of strings. This is useful to skip printing "label" type cards that are sometimes used in boards.
+- **excludeNames** - (an array of strings) if there are any cards that you wish to exclude in the output, enter part of their names in this array of strings. This is useful to skip printing "label" type cards that are sometimes used in boards. When multiple strings are provided, a match on any one string will cause the card to be excluded.
+- **includeNames** - (an array of strings) the opposite to **excludeNames**, if you want to include only cards that contain a certain string in the name, enter the strings in this array of strings. This is useful to select only certain cards that have a string in their title. When multiple strings are provided, a match on any one string will cause the card to be included.
 
 ### Configuring report output
 
@@ -169,7 +180,8 @@ In addition, if you use **outputFormat** 'html':
 
 If you set the above two values only, then the HTML will output to the console. However, there are two more optional settings:
 
-- **htmlOutputPath** (a string file path) this is used as the path for an output file which will be created by this script. Careful, this script silently replaces an existing repot with the same file name!
+- **htmlOutputPath** (a string file path) this is used as the path for an output file which will be created by this script. Careful, this script silently replaces an existing report with the same file name!
+  > **Note:** This property can be overridden in the command line by passing the "-o", "--outputfilepath" command line argument. See _Additional Search Parameters_ below.
 - **autoOpenOutput** (a boolean) if 'true', then the script will not just output to file, but will perform an `open {otput-file-path}` to cause the file to be opened in your default html handler.
 
 ## How to find your Trello Board and List IDs
@@ -181,7 +193,7 @@ That link contains the board id. Links look like this:
 
 The board id is the last part of the url, **a9bcPt5B** in the example above. (Note, 'a9bcPt5B' is not a real board!)
 
-Now, add this to your **conf.json** under **board**, **urlId**.
+Now, add this to your **conf.json** under **board**, **urlId**. Don't worry about **id** (board.id) for now. We'll find that out shortly.
 
 To find all the list ids for this board, you would run:
 
@@ -225,6 +237,16 @@ node report | pbcopy
 
 ```
 
+**Controlling the name of the report output file**
+
+Although the output file name can be controlled in the config via the **htmlOutputPath** property, it can also be overridden via a command line argument.
+
+```bash
+node report --outputfilepath "./output/myreport.html"
+node report -o "./output/myreport.html"
+
+```
+
 ## Searching for Cards
 
 > Note: See the 'Configuration' and 'Authentication' sections above for pre-requisites to being able to run reports.
@@ -252,6 +274,17 @@ You may combine a username search with a string search like this:
 node search "some search string @johnnyappleseed"
 
 ```
+
+**Controlling the name of the search result output file**
+
+Although the output file name can be controlled in the config via the **htmlOutputPath** property, it can also be overridden via a command line argument.
+
+```bash
+node search "some search string" --outputfilepath "./output/myreport.html"
+node search @johnnyappleseed -o "./output/myreport.html"
+
+```
+
 
 ### Search Operators
 
@@ -369,9 +402,124 @@ Please refer to the directory **/advanced-examples/** for some examples of how t
 
 What can these be used for? For instance, you can see all FPEs with their current assignments in ascending order (less cards first) to see which FPE is less busy at the moment.
 
+### stdin search queries (bash pipe and/or file based queries)
+
+The search script supports standard input (stdin). This allows you to chain the search into the output of another command or even to pass in search queries from a file.
+
+For example, if you have one or more search queries in a file like this:
+```text
+@johnnyappleseed
+"kotlin apprentice"
+```
+
+Then you can process them like this:
+```bash
+cat yourfile.txt | node search
+``` 
+(Will search your 'default' board for cards that match the queries inside your file!)
+
+Similarly, if you have a command that generates output, you can pass that into a search.
+
+For example:
+```bash
+someCommandThatGeneratesStrings | node search 
+```
+(Will search your 'default' board for cards that match query strings generated by _someCommandThatGeneratesStrings_.)
+
+## Multi-Board Configuration
+
+Starting with v2.0, this tool supports a configuration file with multiple boards. This allows you to operate on different boards by passing a command line argument into the scripts.
+
+For example:
+```bash
+node report --boardkey "my-awesome-board"
+```
+
+Note that if you don't pass a **boardkey** then the string **'default'** will be used.
+
+For example the following two commands are identical in the end result:
+```bash
+node report
+node report --boardkey "default"
+```
+
+Note that the value for **boardkey** is _cAsE sEnSiTiVe_. 
+
+> **Note:** If you don't have more than one board to work with, there is no benefit to converting to a v2.x config. You may continue to use a v1.x config.
+
+### Will this version break with a v1.x config?
+
+This version operates fine with a v1.x configuration (a single-board configuration.) The code will check the config and if it does not find an array of boards, it assumes a v1.x config and proceeds just as it did before.
+
+Therefore, running the following will work the same with a v1.x config.
+```bash
+node report
+```
+
+However, passing a **boardkey** with a v1.x configuration will produce an error message.
+
+### What is a v2.x config?
+
+A v2.x config is simply an array of objects, otherwise identical to the v1.x objects, but adding a **boardkey** to allow you to easily point the scripts to one board versus another.
+
+For example, whereas before a v1.x config looked like this:
+```json
+{
+  "board": {}
+}
+```
+> **Note:** details of the **board** property omitted for brevity.
+
+A v2.x config instead looks like this:
+```json
+[
+  {
+    "boardkey": "my-board-for-cats",
+    "board": {}
+  },
+  {
+    "boardkey": "my-board-for-dogs",
+    "board": {}
+  }
+]
+```
+> **Note:** details of the **board** property omitted for brevity.
+
+The key feature of a v2.x config is that you can hold details about as many boards as you would like, using a string key (**boardkey**) to tell the scripts which board you wish to act upon.
+
+To use this feature:
+ 
+- If you instead have a v1.x config, first convert it to a v2.x config. (See below for more details).
+- Once you have a v2.x config (it's just an array of boards), add more boards and give them unique **boardkey** values.
+- Run the scripts and be sure to pass **--boardkey "your-board-here"**. 
+
+### Converting a v1.x config to v2.x
+
+To convert your v1.x config to v2.x, simply edit your **conf.json** which should look like this:
+```json
+{
+  "board": {}
+}
+```
+> **Note:** details of the **board** property omitted for brevity.
+
+And edit it to look like this:
+```json
+[
+  {
+    "boardkey": "default",
+    "board": {}
+  }
+]
+```
+> **Note:** details of the **board** property omitted for brevity.
+
+1. Add a square bracket around the contents, making the item an array.
+1. Add the property **boardkey** just above the **board** property and give it the value "default". Using "default" as the value will allow you to run your scripts for this board without providing the **--boardkey** parameter. However, you may instead choose to use a value other than "default" then pass your boardkey value into the scripts.
+
 ## Platform Note
 
-This has been tested under macOS High Sierra, Linux, NodeJS 8.9.0 and NodeJS 10.15.3. It very likely workds under other versions of macOS, and Windows as well as other NodeJS versions, but I've not tested.
+This has been tested under macOS High Sierra, Linux, NodeJS 8.9.0 and NodeJS 10.15.3. It very likely works under other versions of macOS, and Windows as well as other NodeJS versions, but I've not tested.
 
 ## References
 
@@ -384,15 +532,30 @@ Trello API Documentation:
 
 ## Wish List
 
-- (Low Effort) Add logic to use a different name for the output of 'search'. Right now, this script shares the output file 'report.html'. Move to 'search.html'.
-- (Low Effort) Add a config option and corresponding logic to name the output file using a timestamp. For example something like 'report-20190422-032219.html'.
-- (High Effort) When the config is set to HTML output, replace *card_output_format* and *list_name_format* with a more robust template like pug/jade or mustache. This could also consolidate the report-layout.html and report-styles.css into the single file for easier editing. This feature must not affect TEXT output!
-- (Medium Effort) Add support for multiple boards in *conf.json* + add a command line to choose which board to report on. If none provided, we can exit with error OR provide a list for input?
-- (High Effort / Maybe not even possible) Add an easier way to access API KEY, TOKEN if possible, for the initial configuration.
-- (High Effort / Maybe not even possible) Add an easier way to figure out and configure Board Id, Lists Ids during initial configuration.
+- *(Unestimated)* In the lists array, can we generalize **excludeTryouts**? This is very specific to RW but it's probably a string exclusion that we can make into a more generic property.
+- *(Low Effort)* Add logic to use a different name for the output of 'search'. 
+  Right now, this script shares the output file 'report.html'. Move to 'search.html'. However, the name comes from the config. Maybe for search we move to a command line argument.
+- *(Low Effort)* Add a config option and corresponding logic to name the output file using a timestamp. For example something like 'report-20190422-032219.html'.
+- *(High Effort)* When the config is set to HTML output, replace *card_output_format* and *list_name_format* with a more robust template like pug/jade or mustache. This could also consolidate the report-layout.html and report-styles.css into the single file for easier editing. This feature must not affect TEXT output!
+- *(High Effort / Possible?)* Add an easier way to access API KEY, TOKEN if possible, for the initial configuration.
+- *(High Effort / Possible?)* Add an easier way to figure out and configure Board Id, Lists Ids during initial configuration.
 
 ## Changelog
 
+- v2.0.2
+  - Implemented a CLI argument --outputfilepath that allows the search.js and report.js to set the output file for the search or report.
+  - Implemented a new config property search_query_header_prefix that allows customization of the 'header' for each query in search results.
+  - Replaced the stdin library (previously an npm module) with a custom one that better handles both stdin and no stdin.
+- v2.0.1
+  - Introduced multi-board config files. With this version, a config file can be an array of Boards and one board can be selected for a script to work with by passing the command line argument **--boardkey "some-board"**.
+  - Introduced Commander for command line argument processing.
+  - Note that the new multi-board config file is referred to as a v2.x config. The previous 'single board' config is now referred to as a v1.x config.
+  - This version still supports the v1.x config for backwards compatibility. 
+  - All the scripts can be run without the **--boardkey** argument in which case they act upon the one board in a v1.x config OR the board with **"boardkey": "default"** in a v2.x config.
+  - Support for "includeNames" in board configs so that a board can be configured to only include certain cards that match one of a list of strings.
+  - Fixes to "excludeNames" to work properly with an array of strings and to use a "contains" search rather than a full text match.
+  - Added support for `listName` in a card's output.
+  - Support for receiving search queries via stdin in the **search.js** script.
 - v1.1.5
   - Enhanced the **search.js** script to add the user's Full Name in the search results header for **@username** searches.
   - Added details in README.md about **Trello Search Operators** with examples. 

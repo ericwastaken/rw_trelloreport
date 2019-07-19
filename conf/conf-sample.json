@@ -1,41 +1,47 @@
-{
-  "board": {
-    "id": "TRELLO-BOARD-ID",
-    "urlId": "TRELLO-BOARD-URL-ID",
-    "card_fields": "name,shortUrl,due",
-    "card_output_format":
-      "\n* ${card['name']} - ${dateString}\n  [View in Trello](${card['shortUrl']})",
-    "list_name_format": "\n## ${listName}",
-    "empty_list_placeholder": "\n*No tutorials in this phase.*",
-    "card_fields_search": "name,shortUrl,due,list",
-    "card_output_format_search":
-      "\n* ${card['name']} - ${dateString}\n  [View in Trello](${card['shortUrl']}) (${card['list']['name']})",
-    "lists": [
-      {
-        "key": "convenience list name 1",
-        "id": "TRELLO-LIST-ID-01",
-        "excludeTryouts": true,
-        "excludeNames": []
-      },
-      {
-        "key": "convenience list name 2",
-        "id": "TRELLO-LIST-ID-02",
-        "excludeTryouts": true,
-        "excludeNames": []
-      },
-      {
-        "key": "convenience list name 3",
-        "id": "TRELLO-LIST-ID-03",
-        "excludeTryouts": true,
-        "excludeNames": []
+[
+  {
+    "boardkey": "default",
+    "board": {
+      "id": "TRELLO-BOARD-ID",
+      "urlId": "TRELLO-BOARD-URL-ID",
+      "card_fields": "name,shortUrl,due",
+      "card_output_format":
+        "\n* ${card['name']} - ${dateString}\n  [View in Trello](${card['shortUrl']})",
+      "list_name_format": "\n## ${listName}",
+      "empty_list_placeholder": "\n*No tutorials in this phase.*",
+      "card_fields_search": "name,shortUrl,due,list",
+      "card_output_format_search":
+        "\n* ${card['name']} - ${dateString}\n  [View in Trello](${card['shortUrl']}) (${card['list']['name']})",
+      "lists": [
+        {
+          "key": "convenience list name 1",
+          "id": "TRELLO-LIST-ID-01",
+          "excludeTryouts": true,
+          "excludeNames": [],
+          "includeNames": []
+        },
+        {
+          "key": "convenience list name 2",
+          "id": "TRELLO-LIST-ID-02",
+          "excludeTryouts": true,
+          "excludeNames": [],
+          "includeNames": []
+        },
+        {
+          "key": "convenience list name 3",
+          "id": "TRELLO-LIST-ID-03",
+          "excludeTryouts": true,
+          "excludeNames": [],
+          "includeNames": []
+        }
+      ],
+      "output": {
+        "outputFormat": "html",
+        "htmlWrapperPath": "./conf/report-layout.html",
+        "htmlCssPath": "./conf/report-styles.css",
+        "htmlOutputPath": "./output/report.html",
+        "autoOpenOutput": false
       }
-    ],
-    "output": {
-      "outputFormat": "html",
-      "htmlWrapperPath": "./conf/report-layout.html",
-      "htmlCssPath": "./conf/report-styles.css",
-      "htmlOutputPath": "./output/report.html",
-      "autoOpenOutput": false
     }
   }
-}
+]

@@ -1,31 +1,47 @@
 #!/usr/local/bin/node
 
+/**
+ * Main Search Script
+ *
+ * This script will search then generate a report for a search.
+ *
+ * See README.md for details about the config.
+ *
+ */
+
+// Global overrides
+// Use Bluebird Promises
+global.Promise = require('bluebird');
+
 // Imports
 const path = require('path');
 const ReportFormat = require(path.resolve(__dirname, './lib/ReportFormat.js'));
 const HtmlOutput = require(path.resolve(__dirname, './lib/HtmlOutput.js'));
-const PathHelper = require(path.resolve(__dirname, './lib/PathHelper.js'));
-const Promise = require('bluebird');
+const ConfigHelper = require(path.resolve(__dirname, './lib/ConfigHelper.js'));
+const program = require('commander');
+const CommandLineHelper = require(path.resolve(
+  __dirname,
+  './lib/CommandLineHelper.js'
+));
+const assert = require('chai').assert;
+
+// Bring in Stdin
+const getStdin = require('./lib/StdInHelper.js');
+const stringArgv = require('string-argv');
+
+// Setup our CLI options, specifically get --boardkey
+CommandLineHelper.programSetupForSearch(
+  program,
+  `Returns information about all the lists in a Trello bard.`
+);
+assert(program.boardkey, `Unable to continue without boardkey.`);
 
 // Config, with Absolute Paths for components
-const conf = PathHelper.absolutePathConfig(
+const conf = ConfigHelper.loadReportConfig(
   require(path.resolve(__dirname, './conf/conf.json')),
-  __dirname
+  __dirname,
+  program.boardkey
 );
-
-/**
- * Main Report Script
- *
- * This script will generate a report for a search using the user's current scope
- * (all the organizations/boards that the user has access to).
- *
- * If the search term starts with '@', then the search will be for a "member" on
- * cards.
- *
- * When outputFormat is set to html or rtf, we expect the conf 'card_output_format'
- * to contain markdown which will then converted into html/rtf.
- *
- */
 
 // Output format (html, rtf, text, or anything else for text)
 let outputFormat = 'text';
@@ -55,49 +71,60 @@ let modifiers = {
   excludeDone: false,
 };
 
-for (let j = 2; j < process.argv.length; j++) {
-  let param = process.argv[j];
-  if (param.startsWith('--')) {
-    // it's a cli modifier, so set it
-    if (param.toLowerCase() === '--excludedone') {
-      modifiers.excludeDone = true;
-    }
-    if (param.toLowerCase() === '--sortbytaskcount-lessfirst') {
-      modifiers.sortByTaskCountLessFirst = true;
-    }
-    if (param.toLowerCase() === '--sortbytaskcount-morefirst') {
-      modifiers.sortByTaskCountMoreFirst = true;
-    }
-  } else {
-    // it's a query so add it to that array
-    queries.push(process.argv[j]);
-  }
+// Set modifiers from commander command line arguments
+if (program.excludeDone) {
+  modifiers.excludeDone = true;
 }
-// Set an array to hold our promises
-let promiseArray = [];
-let promiseResults = [];
+if (program.sortbytaskcountLessfirst) {
+  modifiers.sortByTaskCountLessFirst = true;
+}
+if (program.sortbytaskcountMorefirst) {
+  modifiers.sortByTaskCountMoreFirst = true;
+}
 
-// Execute the search
-promiseArray.push(() =>
-  ReportFormat.printSearchReport(queries, boardToSearch, modifiers, conf)
-);
+// Set the queries from the command line. Note that Commander automatically extracts
+// command line arguments that start with '-' or '--'
+for (let j = 0; j < program.args.length; j++) {
+  queries.push(program.args[j]);
+}
 
-// With all the promises in an array, now we want to fire each in sequence and capture results
-Promise.each(promiseArray, (aPromise, index, length) => {
-  // Process the one promise (one at a time)
-  return aPromise().then(outputString => {
-    // Save our string from the promise step into the promiseResults array so we can process it later
-    promiseResults[index] = outputString;
-  });
-})
-  .then(() => {
-    if (outputFormat === 'html') {
-      HtmlOutput.finalOutput(promiseResults, conf, __dirname);
-    } else {
-      console.log(promiseResults.join(''));
+// Process any stdin queries (we only support queries via stdin)
+// Then proceed with the searches
+getStdin()
+  .then(stdin => {
+    let stdinArray = stringArgv.parseArgsStringToArgv(stdin);
+    // Set the queries from stdin.
+    for (let j = 0; j < stdinArray.length; j++) {
+      queries.push(stdinArray[j]);
     }
   })
-  .catch(error => {
-    // We have some error, outputFormat information about it.
-    console.log(`{ "Error": "`, error, `"}`);
+  .then(() => {
+    // Set an array to hold our promises
+    let promiseArray = [];
+    let promiseResults = [];
+
+    // Execute the search
+    promiseArray.push(() =>
+      ReportFormat.printSearchReport(queries, boardToSearch, modifiers, conf)
+    );
+
+    // With all the promises in an array, now we want to fire each in sequence and capture results
+    Promise.each(promiseArray, (aPromise, index, length) => {
+      // Process the one promise (one at a time)
+      return aPromise().then(outputString => {
+        // Save our string from the promise step into the promiseResults array so we can process it later
+        promiseResults[index] = outputString;
+      });
+    })
+      .then(() => {
+        if (outputFormat === 'html') {
+          HtmlOutput.finalOutput(promiseResults, conf, __dirname, program);
+        } else {
+          console.log(promiseResults.join(''));
+        }
+      })
+      .catch(error => {
+        // We have some error, outputFormat information about it.
+        console.log(`{ "Error": "`, error, `"}`);
+      });
   });

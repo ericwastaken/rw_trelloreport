@@ -1,24 +1,42 @@
 #!/usr/local/bin/node
 
-// Imports
-const path = require('path');
-const Promise = require('bluebird');
-const TrelloApi = require(path.resolve(__dirname, './lib/TrelloApi.js'));
-const PathHelper = require(path.resolve(__dirname, './lib/PathHelper.js'));
-
-// Config, with Absolute Paths for components
-const conf = PathHelper.absolutePathConfig(
-  require(path.resolve(__dirname, './conf/conf.json')),
-  __dirname
-);
-
 /**
- * This is autility script to provide the IDs of all the lists in a board as configured in board.id in the conf.js.
- * Syntax:
- *   `./lists.js`
+ * This is a utility script to provide the IDs of all the lists in a board as configured in board.id in the conf.js.
+ *
+ * See README.md for details about the config.
+ *
  */
 
-const boardId = conf.board.urlId;
+// Global overrides
+// Use Bluebird Promises
+global.Promise = require('bluebird');
+
+// Imports
+const path = require('path');
+const TrelloApi = require(path.resolve(__dirname, './lib/TrelloApi.js'));
+const ConfigHelper = require(path.resolve(__dirname, './lib/ConfigHelper.js'));
+const CommandLineHelper = require(path.resolve(
+  __dirname,
+  './lib/CommandLineHelper.js'
+));
+const program = require('commander');
+const assert = require('chai').assert;
+
+// Setup our CLI options, specifically get --boardkey
+CommandLineHelper.programSetupReport(
+  program,
+  `Returns information about all the lists in a Trello bard.`
+);
+assert(program.boardkey, `Unable to continue without boardkey.`);
+
+// Config, with Absolute Paths for components
+const conf = ConfigHelper.loadReportConfig(
+  require(path.resolve(__dirname, './conf/conf.json')),
+  __dirname,
+  program.boardkey
+);
+
+const boardId = conf['board']['urlId'];
 
 if (!boardId) {
   console.log(`{ "Error": "conf.json does not have 'board.urlId'!"}`);

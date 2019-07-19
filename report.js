@@ -1,27 +1,43 @@
 #!/usr/local/bin/node
 
-// Imports
-const path = require('path');
-const ReportFormat = require(path.resolve(__dirname, './lib/ReportFormat.js'));
-const HtmlOutput = require(path.resolve(__dirname, './lib/HtmlOutput.js'));
-const PathHelper = require(path.resolve(__dirname, './lib/PathHelper.js'));
-const Promise = require('bluebird');
-
-// Config, with Absolute Paths for components
-const conf = PathHelper.absolutePathConfig(
-  require(path.resolve(__dirname, './conf/conf.json')),
-  __dirname
-);
-
 /**
  * Main Report Script
  *
  * This script will generate a report for a board and lists configured in ./conf/conf.json.
  *
- * When outputFormat is set to html or rtf, we expect the conf 'card_output_format' and 'list_name_format'
- * to contain markdown which will then converted into html/rtf.
+ * See README.md for details about the config.
  *
  */
+
+// Global overrides
+// Use Bluebird Promises
+global.Promise = require('bluebird');
+
+// Imports
+const path = require('path');
+const ReportFormat = require(path.resolve(__dirname, './lib/ReportFormat.js'));
+const HtmlOutput = require(path.resolve(__dirname, './lib/HtmlOutput.js'));
+const ConfigHelper = require(path.resolve(__dirname, './lib/ConfigHelper.js'));
+const program = require('commander');
+const CommandLineHelper = require(path.resolve(
+  __dirname,
+  './lib/CommandLineHelper.js'
+));
+const assert = require('chai').assert;
+
+// Setup our CLI options, specifically get --boardkey
+CommandLineHelper.programSetupReport(
+  program,
+  `Creates a report from a Trello bard.`
+);
+assert(program.boardkey, `Unable to continue without boardkey.`);
+
+// Config, with Absolute Paths for components
+const conf = ConfigHelper.loadReportConfig(
+  require(path.resolve(__dirname, './conf/conf.json')),
+  __dirname,
+  program.boardkey
+);
 
 // Output format (html, rtf, text, or anything else for text)
 let outputFormat = 'text';
@@ -52,7 +68,7 @@ Promise.each(promiseArray, (aPromise, index, length) => {
   .then(() => {
     switch (outputFormat) {
       case 'html':
-        HtmlOutput.finalOutput(promiseResults, conf);
+        HtmlOutput.finalOutput(promiseResults, conf, __dirname, program);
         break;
       default:
         // Otherwise, just outputFormat raw, but as a string with no delimiters
