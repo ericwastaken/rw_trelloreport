@@ -533,8 +533,6 @@ Trello API Documentation:
 ## Wish List
 
 - *(Unestimated)* In the lists array, can we generalize **excludeTryouts**? This is very specific to RW but it's probably a string exclusion that we can make into a more generic property.
-- *(Low Effort)* Add logic to use a different name for the output of 'search'. 
-  Right now, this script shares the output file 'report.html'. Move to 'search.html'. However, the name comes from the config. Maybe for search we move to a command line argument.
 - *(Low Effort)* Add a config option and corresponding logic to name the output file using a timestamp. For example something like 'report-20190422-032219.html'.
 - *(High Effort)* When the config is set to HTML output, replace *card_output_format* and *list_name_format* with a more robust template like pug/jade or mustache. This could also consolidate the report-layout.html and report-styles.css into the single file for easier editing. This feature must not affect TEXT output!
 - *(High Effort / Possible?)* Add an easier way to access API KEY, TOKEN if possible, for the initial configuration.
