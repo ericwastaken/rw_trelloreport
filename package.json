@@ -1,6 +1,6 @@
 {
   "name": "rw-trello-report",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "description": "Trello Report Tool",
   "main": "report.js",
   "scripts": {

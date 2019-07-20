@@ -540,6 +540,8 @@ Trello API Documentation:
 
 ## Changelog
 
+- v2.0.3
+  - Minor fix to the StdIn helper module so that the node process ends properly even when no stdin is passed.
 - v2.0.2
   - Implemented a CLI argument --outputfilepath that allows the search.js and report.js to set the output file for the search or report.
   - Implemented a new config property search_query_header_prefix that allows customization of the 'header' for each query in search results.
