@@ -69,5 +69,14 @@ if [[ -z "$1" ]] || [[ -z "$2" ]]; then
     exit -1
 fi
 
-# Let's do the work.
-node ${BASH_SCRIPT_PATH}/../report.js -r $1 | grep "$2" | cut -d"|" -f1 | egrep -o "@.*"
+# Let's do the work:
+# 1. run the report, which we expect to return stdout for further cli processing
+# 2. grep and look for the $2 string expected to have the "list" we're interested in (authors, tech editors, FPEs, etc)
+# 3. cut by the pipe (the output is expected to be "card content|list name" so we cut at the pipe "|" and gran the 1st
+#    field, effectively dropping the pipe and the list name.
+# 4. grep for the "@" sign and as many chars as follow (we're looking for the username which is expected to be in the
+#    card title in this case.)
+# 5. Now, we cut by the space char (some titles have "Teammate Name @username (some other comments)" effectively
+#    giving us the username only.
+#                           1                 2           3               4                5
+node ${BASH_SCRIPT_PATH}/../report.js -r $1 | grep "$2" | cut -d"|" -f1 | egrep -o "@.*" | cut -d" " -f1
