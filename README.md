@@ -540,6 +540,8 @@ Trello API Documentation:
 
 ## Changelog
 
+- v2.0.4 (unreleased WIP)
+  - Fix to search so that when a username can't be found in Trello, the search script continues and uses a static string for the missing username.
 - v2.0.3
   - Minor fix to the StdIn helper module so that the node process ends properly even when no stdin is passed.
 - v2.0.2
