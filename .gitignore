@@ -20,4 +20,5 @@ conf/report-styles.css
 *.html
 # Exclude GitPod items we don't want in the repo
 .gitpod/gitpod-bootstrap.log
-
+node_modules/
+*.DS_Store

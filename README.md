@@ -1,5 +1,43 @@
 # Trello Report
 
+## Carolus Stats
+
+This should be integrated properly into the readme - I've put this up front for now to clearly illustrate how to get what you need to get this working.
+
+### Authentication
+
+You need to be able to log into Carolus admin, which is [here](https://www.raywenderlich.com/admin). Once you do that, click on "Popular Content". You want to open your web browser's dev tools now, and select the "Network" tab. Select "HTML" if you are using Firefox to specify that you want to look at HTML requests.
+
+Next, make a search request to search for articles for a specific domain. Click the search button, and you'll see the request pop up in your dev tools pane. Find the headers for the request, and find the "Cookie" header. Copy the content of that cookie to a text editor.
+
+![image describing how to get the cookie from the request to Carolus to authenticate the stats.js tool](./images/GetCarolusCookie.png)
+
+Next, when you change `secrets-sample.json` to `secrets.json`, you'll have a place to paste the cookie - do so here.
+
+Lastly, you'll need to set the `days` and `domain` nodes in this `secrets.json` file. For `days`, you can only choose 7, 30, or 365. For domain, refer to the following chart:
+
+| Domain            | Code  |
+| ----------------- |-------|
+| iOS & Swift       | 1     |
+| Android & Kotlin  | 2     |
+| Unity             | 3     |
+| General & Tech    | 4     |
+| macOS             | 5     |
+| Python            | 6     |
+| Podcast           | 7     |
+| Server-side Swift | 8     |
+| Flutter           | 9     |
+
+Once you enter these values into `secrets.json`, open Terminal and run `node stats.js`. Output should look like so:
+
+```json
+{ article: 'Antonio Leiva – Clean Architecture/Assistant Actions – Podcast S09 E13',
+  author: 'Dru FreemanJenn Bailey',
+  pageViews: '3437',
+  link: 'https://www.raywenderlich.com/5781436-antonio-leiva-clean-architecture-assistant-actions-podcast-s09-e13' }
+```
+
+
 ## Summary
 
 This tool uses the Trello API to pull lists of cards and then report/search on them. This tool is written in JavaScript and requires NodeJS 8.x to run.

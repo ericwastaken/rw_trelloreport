@@ -22,7 +22,8 @@
     "http-server": "^0.11.1",
     "commander": "^2.20.0",
     "chai": "^4.2.0",
-    "string-argv": "^0.3.0"
+    "string-argv": "^0.3.0",
+    "cheerio": "latest"
   },
   "devDependencies": {
     "mocha": "^6.1.4"
