@@ -31,12 +31,11 @@ Lastly, you'll need to set the `days` and `domain` nodes in this `secrets.json` 
 Once you enter these values into `secrets.json`, open Terminal and run `node stats.js`. Output should look like so:
 
 ```json
-{ article: 'Antonio Leiva – Clean Architecture/Assistant Actions – Podcast S09 E13',
-  author: 'Dru FreemanJenn Bailey',
-  pageViews: '3437',
-  link: 'https://www.raywenderlich.com/5781436-antonio-leiva-clean-architecture-assistant-actions-podcast-s09-e13' }
+{ "article": "Antonio Leiva – Clean Architecture/Assistant Actions – Podcast S09 E13",
+  "author": "Dru FreemanJenn Bailey",
+  "pageViews": 3437,
+  "link": "https://www.raywenderlich.com/5781436-antonio-leiva-clean-architecture-assistant-actions-podcast-s09-e13" }
 ```
-
 
 ## Summary
 
