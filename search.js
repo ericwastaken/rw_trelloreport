@@ -65,15 +65,28 @@ if (!arguments) {
   process.exit(-1);
 }
 
+if (program.excludeDone && program.onlyDone) {
+    console.log(
+    `{ "Error": "The options --excludeDone and --onlyDone must not be used together!"}`
+  );
+  process.exit(-1);
+}
+
+// ASSERT: We do not have --excludeDone && --onlyDone together!
+
 // How many CLI queries were we passed
 let queries = [];
 let modifiers = {
   excludeDone: false,
+  onlyDone: false,
 };
 
 // Set modifiers from commander command line arguments
 if (program.excludeDone) {
   modifiers.excludeDone = true;
+}
+if (program.onlyDone) {
+  modifiers.onlyDone = true;
 }
 if (program.sortbytaskcountLessfirst) {
   modifiers.sortByTaskCountLessFirst = true;
