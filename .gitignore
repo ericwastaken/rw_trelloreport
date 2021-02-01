@@ -16,8 +16,8 @@ conf/conf.json
 # Exclude the user's html and css
 conf/report-layout.html
 conf/report-styles.css
-# Exclude any html reports
-*.html
+# Exclude any output
+output/*
 # Exclude GitPod items we don't want in the repo
 .gitpod/gitpod-bootstrap.log
 
