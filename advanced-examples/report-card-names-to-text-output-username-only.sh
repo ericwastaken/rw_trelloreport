@@ -78,5 +78,6 @@ fi
 #    card title in this case.)
 # 5. Now, we cut by the space char (some titles have "Teammate Name @username (some other comments)" effectively
 #    giving us the username only.
-#                           1                 2           3               4                5
-node ${BASH_SCRIPT_PATH}/../report.js -r $1 | egrep "$2" | cut -d"|" -f1 | egrep -o "@.*" | cut -d" " -f1
+# 6. Sort with unique to remove any duplicates
+#                           1                2            3               4                5               6
+node ${BASH_SCRIPT_PATH}/../report.js -r $1 | egrep "$2" | cut -d"|" -f1 | egrep -o "@.*" | cut -d" " -f1 | sort -u
