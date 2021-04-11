@@ -30,13 +30,13 @@ CommandLineHelper.programSetupReport(
   program,
   `Creates a report from a Trello bard.`
 );
-assert(program.boardkey, `Unable to continue without boardkey.`);
+assert(program.opts().boardkey, `Unable to continue without boardkey.`);
 
 // Config, with Absolute Paths for components
 const conf = ConfigHelper.loadReportConfig(
   require(path.resolve(__dirname, './conf/conf.json')),
   __dirname,
-  program.boardkey
+  program.opts().boardkey
 );
 
 // Output format (html, rtf, text, or anything else for text)

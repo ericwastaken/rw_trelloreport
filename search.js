@@ -34,13 +34,13 @@ CommandLineHelper.programSetupForSearch(
   program,
   `Returns information about all the lists in a Trello bard.`
 );
-assert(program.boardkey, `Unable to continue without boardkey.`);
+assert(program.opts().boardkey, `Unable to continue without boardkey.`);
 
 // Config, with Absolute Paths for components
 const conf = ConfigHelper.loadReportConfig(
   require(path.resolve(__dirname, './conf/conf.json')),
   __dirname,
-  program.boardkey
+  program.opts().boardkey
 );
 
 // Output format (html, rtf, text, or anything else for text)
@@ -65,7 +65,7 @@ if (!arguments) {
   process.exit(-1);
 }
 
-if (program.excludeDone && program.onlyDone) {
+if (program.opts().excludeDone && program.opts().onlyDone) {
     console.log(
     `{ "Error": "The options --excludeDone and --onlyDone must not be used together!"}`
   );
@@ -82,16 +82,16 @@ let modifiers = {
 };
 
 // Set modifiers from commander command line arguments
-if (program.excludeDone) {
+if (program.opts().excludeDone) {
   modifiers.excludeDone = true;
 }
-if (program.onlyDone) {
+if (program.opts().onlyDone) {
   modifiers.onlyDone = true;
 }
-if (program.sortbytaskcountLessfirst) {
+if (program.opts().sortbytaskcountLessfirst) {
   modifiers.sortByTaskCountLessFirst = true;
 }
-if (program.sortbytaskcountMorefirst) {
+if (program.opts().sortbytaskcountMorefirst) {
   modifiers.sortByTaskCountMoreFirst = true;
 }
 
@@ -131,7 +131,7 @@ getStdin()
     })
       .then(() => {
         if (outputFormat === 'html') {
-          HtmlOutput.finalOutput(promiseResults, conf, __dirname, program);
+          HtmlOutput.finalOutput(promiseResults, conf, __dirname, program.opts());
         } else {
           console.log(promiseResults.join(''));
         }

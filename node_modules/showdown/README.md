@@ -17,21 +17,24 @@ Showdown can be used client side (in the browser) or server side (with NodeJs).
 
 Check a live Demo here http://demo.showdownjs.com/
 
+## [![Patreon](https://c5.patreon.com/external/logo/become_a_patron_button.png)](https://www.patreon.com/bePatron?u=11141581)
+
+As you know, ShowdownJS is a free library and it will remain free forever. However, maintaining and improving the library costs time and money.
+
+If you like our work and find our library useful, please donate through [patreon](https://www.patreon.com/showdownjs) or directly through [paypal](https://www.paypal.me/tiviesantos)!! Your contribution will be greatly appreciated and help me continue to develop this awesome library.
+
+## License
+
+Showdown 1.x is released under GPL 2.0
 
 ## Who uses Showdown (or a fork)
 
  - [GoogleCloudPlatform](https://github.com/GoogleCloudPlatform)
- - [Ghost](https://ghost.org/)
  - [Meteor](https://www.meteor.com/)
  - [Stackexchange](http://stackexchange.com/) - forked as [PageDown](https://code.google.com/p/pagedown/)
  - [docular](https://github.com/Vertafore/docular)
+ - [md-page](https://github.com/oscarmorrison/md-page)
  - [and some others...](https://www.npmjs.com/browse/depended/showdown)
-
-## Donate [![Click here to lend your support to: ShowdownJS website and testing platform and make a donation at pledgie.com](https://pledgie.com/campaigns/35166.png?skin_name=chrome)](https://pledgie.com/campaigns/35166)
-
-As you know, ShowdownJS is a free library and it will remain free forever. However, maintaining and improving the library costs time and money.
-
-If you like our work and find our library useful, please donate [through Pledgie](https://pledgie.com/campaigns/35166) or directly [through paypal](https://www.paypal.me/tiviesantos)!! Your contribution will be greatly appreciated and help us continue to develop this awesome library.
 
 ## Installation
 
@@ -84,7 +87,7 @@ The converter itself might even work in things that aren't web browsers, like Ac
 
 ## Node compatibility
 
-Showdown has been tested with node 0.8 and 0.10. However, it should work with previous versions, such as node 0.6.
+Showdown has been tested with node 6, 8 and 10. However, it should work with previous versions, such as node 0.12.
 
 
 ## Legacy version
@@ -103,26 +106,42 @@ Check our [wiki pages][wiki] for examples and a more in-depth documentation.
 
 ### Node
 
+**Markdown to HTML**
 ```js
 var showdown  = require('showdown'),
     converter = new showdown.Converter(),
-    text      = '#hello, markdown!',
+    text      = '# hello, markdown!',
     html      = converter.makeHtml(text);
 ```
+
+**HTML to Markdown**
+```js
+var showdown  = require('showdown'),
+    converter = new showdown.Converter(),
+    html      = '<a href="https://patreon.com/showdownjs">Please Support us!</a>',
+    md        = converter.makeMarkdown(text);
+```
+
 
 ### Browser
 
 ```js
 var converter = new showdown.Converter(),
-    text      = '#hello, markdown!',
-    html      = converter.makeHtml(text);
+    html      = converter.makeHtml('# hello, markdown!'),
+    md        = converter.makeMd('<a href="https://patreon.com/showdownjs">Please Support us!</a>');
 ```
 
 ### Output 
 
 Both examples should output...
 
+```html
     <h1 id="hellomarkdown">hello, markdown!</h1>
+```
+
+```md
+[Please Support us!](https://patreon.com/showdownjs)
+```
 
 ## Options
 
@@ -248,7 +267,7 @@ var defaultOptions = showdown.getDefaultOptions();
    some text www.google.com
    ```
    will be parsed as 
-   ````
+   ```html
    <p>some text <a href="www.google.com">www.google.com</a>
    ```
  
@@ -307,7 +326,7 @@ var defaultOptions = showdown.getDefaultOptions();
 
  * **ghCodeBlocks**: (boolean) [default true] Enable support for GFM code block style.
 
- * **tasklists**:(boolean) [default false] Enable support for GFM takslists. Example:
+ * **tasklists**: (boolean) [default false] Enable support for GFM tasklists. Example:
  
    ```md
     - [x] This task is done
@@ -326,7 +345,7 @@ var defaultOptions = showdown.getDefaultOptions();
    needing 2 spaces at the end of the line **(since v1.5.1)**
  
    ```md
-   a line
+   a line  
    wrapped in two
    ```
     
@@ -365,6 +384,12 @@ var defaultOptions = showdown.getDefaultOptions();
 
  * **metadata**: (boolean) [default false] Enable support for document metadata (defined at the top of the document
    between `«««` and `»»»` or between `---` and `---`).  (since v.1.8.5)
+   
+   ```js
+   var conv = new showdown.Converter({metadata: true});
+   var html = conv.makeHtml(someMd);
+   var metadata = conv.getMetadata(); // returns an object with the document metadata
+   ```
 
  * **splitAdjacentBlockquotes**: (boolean) [default false] Split adjacent blockquote blocks.(since v.1.8.6)
 
@@ -425,11 +450,12 @@ You can also find a boilerplate, to create your own extensions in [this reposito
 
 ### Client-side Extension Usage
 
-```js
-<script src="showdown.js" />
-<script src="twitter-extension.js" />
-
+```html
+<script src="showdown.js"></script>
+<script src="twitter-extension.js"></script>
+<script>
 var converter = new showdown.Converter({ extensions: ['twitter'] });
+</script>
 ```
 
 ### Server-side Extension Usage
@@ -515,7 +541,7 @@ Showdown is powered by:<br/>
 [changelog]: https://github.com/showdownjs/showdown/blob/master/CHANGELOG.md
 [wiki]: https://github.com/showdownjs/showdown/wiki
 [cli-wiki]: https://github.com/showdownjs/showdown/wiki/CLI-tool
-[definitely-typed]: https://github.com/borisyankov/DefinitelyTyped/tree/master/showdown
+[definitely-typed]: https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/showdown
 [xss-wiki]: https://github.com/showdownjs/showdown/wiki/Markdown's-XSS-Vulnerability-(and-how-to-mitigate-it)
 [ext-wiki]: https://github.com/showdownjs/showdown/wiki/extensions
 [coding-rules]: https://github.com/showdownjs/code-style/blob/master/README.md

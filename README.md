@@ -540,6 +540,10 @@ Trello API Documentation:
 
 ## Changelog
 
+- v2.1 - Dependencies Update
+  - Updated Packages as of 04/11/2021
+  - Fixed breaking changes due to packages
+  - Added an explicit license to README
 - v2.0.4
   - Fix to search so that when a username can't be found in Trello, the search script continues and uses a static string for the missing username.
   - Tweaks to the advanced example scripts.
@@ -581,3 +585,13 @@ Trello API Documentation:
   - Note that this version **still** supports the v1.0.0 config file. As such with this new version , text output should still be produced as it was before, though for HTML output, the config needs to be updated! See the config section of this readme for the needed changes.
 - v1.0.0
   - Initial release with support for text output only.
+
+## License
+
+Copyright © 2021 E.A.Soto
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
